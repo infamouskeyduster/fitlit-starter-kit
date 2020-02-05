@@ -1,0 +1,67 @@
+	/*
+  	Flaticon icon font: Flaticon
+  	Creation date: 21/01/2019 08:18
+  	*/
+
+@font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+  font-family: Flaticon;
+        font-size: 20px;
+font-style: normal;
+margin-left: 20px;
+}
+
+.flaticon-001-mobile:before { content: "\f100"; }
+.flaticon-002-calendar:before { content: "\f101"; }
+.flaticon-003-watch:before { content: "\f102"; }
+.flaticon-004-earphones:before { content: "\f103"; }
+.flaticon-005-female:before { content: "\f104"; }
+.flaticon-006-finish-line:before { content: "\f105"; }
+.flaticon-007-finish-line-1:before { content: "\f106"; }
+.flaticon-008-finish-line-2:before { content: "\f107"; }
+.flaticon-009-finish-line-3:before { content: "\f108"; }
+.flaticon-010-fishing:before { content: "\f109"; }
+.flaticon-011-male:before { content: "\f10a"; }
+.flaticon-012-medal:before { content: "\f10b"; }
+.flaticon-013-medal-1:before { content: "\f10c"; }
+.flaticon-014-medal-2:before { content: "\f10d"; }
+.flaticon-015-watch-1:before { content: "\f10e"; }
+.flaticon-016-podium:before { content: "\f10f"; }
+.flaticon-017-run:before { content: "\f110"; }
+.flaticon-018-run-1:before { content: "\f111"; }
+.flaticon-019-running:before { content: "\f112"; }
+.flaticon-020-running-1:before { content: "\f113"; }
+.flaticon-021-running-2:before { content: "\f114"; }
+.flaticon-022-running-3:before { content: "\f115"; }
+.flaticon-023-running-4:before { content: "\f116"; }
+.flaticon-024-running-5:before { content: "\f117"; }
+.flaticon-025-running-6:before { content: "\f118"; }
+.flaticon-026-shoe:before { content: "\f119"; }
+.flaticon-027-smartwatch:before { content: "\f11a"; }
+.flaticon-028-smartwatch-1:before { content: "\f11b"; }
+.flaticon-029-smartwatch-2:before { content: "\f11c"; }
+.flaticon-030-start:before { content: "\f11d"; }
+.flaticon-031-stopwatch:before { content: "\f11e"; }
+.flaticon-032-torch:before { content: "\f11f"; }
+.flaticon-033-trail-running:before { content: "\f120"; }
+.flaticon-034-trophy:before { content: "\f121"; }
+.flaticon-035-water-bottle:before { content: "\f122"; }
+.flaticon-036-water-bottle-1:before { content: "\f123"; }
