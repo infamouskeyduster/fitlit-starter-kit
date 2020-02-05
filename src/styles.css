@@ -1,0 +1,80 @@
+/* css reset specific rules */
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  border: none;
+  font-family: 'Lora', serif;
+}
+
+/* possible fonts
+font-family: 'Fredoka One', cursive;
+font-family: 'Oswald', sans-serif;
+font-family: 'Lora', serif; */
+
+
+/*Color pallet #BFBDC1 #CDD84F #8E5572 #114B5F #31B186*/
+
+html,
+body,
+main {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background:#114B5F;
+  color: #CDD84F;
+  padding: 0em 3.5rem;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 2.5rem 0rem 1.5rem;
+}
+
+.icon {
+  width: 2rem;
+}
+main {
+  display: grid;
+  width: 100%;
+  grid-template-areas:
+            "a a b c"
+            "d e f c";
+  grid-auto-rows: 20rem;
+  grid-auto-columns: 25%;
+  grid-gap: .5rem;
+
+}
+
+.tile {
+  background: #BFBDC1;
+  width: 100%;
+  height: 100%;
+}
+
+.user-graph {
+  grid-area: a;
+}
+
+.user-calories {
+  grid-area: b;
+}
+
+.friend-list {
+  grid-area: c;
+}
+
+.user-distance {
+  grid-area: d;
+}
+
+.user-sleep {
+  grid-area: e;
+}
+
+.user-steps {
+  grid-area: f;
+}
