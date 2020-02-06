@@ -39,7 +39,7 @@ describe('User class object', function () {
   });
 
   it('Should be able to have an email', function(){
-    expect(user.email).to.equal(1);
+    expect(user.email).to.equal('Diana.Hayes1@hotmail.com');
   });
 
   it('Should be able to have an strideLength', function(){
