@@ -35,7 +35,7 @@ describe('User class object', function () {
   });
 
   it('Should be able to have an address', function(){
-    expect(user.address).to.equal(1);
+    expect(user.address).to.equal('15195 Nakia Tunnel, Erdmanport VA 19901-1697');
   });
 
   it('Should be able to have an email', function(){
