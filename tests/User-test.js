@@ -43,11 +43,11 @@ describe('User class object', function () {
   });
 
   it('Should be able to have an strideLength', function(){
-    expect(user.strideLength).to.equal(1);
+    expect(user.strideLength).to.equal(4.3);
   });
 
   it('Should be able to have an dailyStepGoal', function(){
-    expect(user.dailyStepGoal).to.equal(1);
+    expect(user.dailyStepGoal).to.equal(10000);
   });
 
   it('Should be able to have an friends', function(){
