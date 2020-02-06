@@ -51,7 +51,7 @@ describe('User class object', function () {
   });
 
   it('Should be able to have an friends', function(){
-    expect(user.friends).to.deep.equal([]);
+    expect(user.friends).to.deep.equal([16, 4, 8]);
   });
 
 });
