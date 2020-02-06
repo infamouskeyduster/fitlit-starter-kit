@@ -31,7 +31,7 @@ describe('User class object', function () {
   });
 
   it('Should be able to have an name', function(){
-    expect(user.name).to.equal(1);
+    expect(user.name).to.equal('Luisa Hane');
   });
 
   it('Should be able to have an address', function(){
