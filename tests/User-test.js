@@ -26,32 +26,36 @@ describe('User class object', function () {
     expect(User).to.be.a('function');
   });
 
-  it('Should be able to have an id', function(){
+  it('Should be able to have an id', function () {
     expect(user.id).to.equal(1);
   });
 
-  it('Should be able to have an name', function(){
+  it('Should be able to have an name', function () {
     expect(user.name).to.equal('Luisa Hane');
   });
 
-  it('Should be able to have an address', function(){
+  it('Should be able to have an address', function () {
     expect(user.address).to.equal('15195 Nakia Tunnel, Erdmanport VA 19901-1697');
   });
 
-  it('Should be able to have an email', function(){
+  it('Should be able to have an email', function () {
     expect(user.email).to.equal('Diana.Hayes1@hotmail.com');
   });
 
-  it('Should be able to have an strideLength', function(){
+  it('Should be able to have an strideLength', function () {
     expect(user.strideLength).to.equal(4.3);
   });
 
-  it('Should be able to have an dailyStepGoal', function(){
+  it('Should be able to have an dailyStepGoal', function () {
     expect(user.dailyStepGoal).to.equal(10000);
   });
 
-  it('Should be able to have an friends', function(){
+  it('Should be able to have an friends', function () {
     expect(user.friends).to.deep.equal([16, 4, 8]);
+  });
+
+  it('Should have a method that returns the user\'s  First Name ', function () {
+    expect(user.showUserFirstName()).to.equal('Luisa');
   });
 
 });

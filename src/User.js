@@ -9,6 +9,11 @@ class User {
     this.friends = userData.friends;
   }
 
+  showUserFirstName() {
+    let names = this.name.split(' ');
+    return names[0];
+  }
+
 }
 
 if (typeof module !== 'undefined') {
