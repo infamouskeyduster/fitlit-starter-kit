@@ -1,3 +1,8 @@
+if (typeof module !== 'undefined') {
+  // const UserRepository = require('./user-repository');
+  // const userRepository = new UserRepository();
+}
+
 class User {
   constructor(userData) {
     this.id = userData.id;
@@ -7,6 +12,9 @@ class User {
     this.strideLength = userData.strideLength;
     this.dailyStepGoal = userData.dailyStepGoal;
     this.friends = userData.friends;
+    this.hydrationData = null;
+    // this.sleepData = null;
+    // this.activityData = null;
   }
 
   showUserFirstName() {
@@ -14,6 +22,43 @@ class User {
     return names[0];
   }
 
+  findUserData(usersId, dataRepo, dataType) {
+    let data = dataRepo[dataType].filter(data => data.userID === usersId);
+    this[dataType] = data;
+  }
+
+  avgFluidConsumed() {
+    let total = this.hydrationData.reduce((total, flOz) => {
+                  total += flOz.numOunces;
+                  return total;
+                }, 0);
+    return total / this.hydrationData.length;
+  }
+
+  getHydrationDataSetByDate(year, month, day) {
+    let monthUnder10 = (month < 10) ? 0 : '';
+    let dayUnder10 = (day < 10) ? 0 : '';
+    let dataset = this.hydrationData.find(data => data.date === `${year}/${monthUnder10}${month}/${dayUnder10}${day}`);
+    return dataset;
+  }
+
+  fluidConsumedByDay(year, month, day) {
+    let dataset = this.getHydrationDataSetByDate(year, month, day);
+    return dataset.numOunces;
+  }
+
+  fluidConsumedPerWeek(year, month, day) {
+    let dataset = this.getHydrationDataSetByDate(year, month, day);
+    let startDay = this.hydrationData.indexOf(dataset);
+    let week = this.hydrationData.slice(startDay, (startDay + 7));
+    return week.map(day => {
+      let newValue = {date: day.date, numOunces: day.numOunces};
+      return newValue;
+    });
+  }
+
+//For a user, how many fluid ounces they consumed
+//for a specific day (identified by a date)
 }
 
 if (typeof module !== 'undefined') {

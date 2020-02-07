@@ -1,11 +1,8 @@
-
-if (typeof module !== 'undefined') {
-  const userData = require('../data/users.js');
-}
-
 class UserRepository {
-  constructor(userData) {
+  constructor(userData, hydrationData) {
     this.users = userData;
+    this.hydrationData = hydrationData;
+    // this.sleep = sleepData;
   }
 
   findUser(userId) {
