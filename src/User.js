@@ -27,12 +27,12 @@ class User {
     this[dataType] = data;
   }
 
-  avgFluidConsumed() {
-    let total = this.hydrationData.reduce((total, flOz) => {
+  avgFluidConsumed(avgOf) {
+    let total = avgOf.reduce((total, flOz) => {
                   total += flOz.numOunces;
                   return total;
                 }, 0);
-    return total / this.hydrationData.length;
+    return Math.trunc(total / avgOf.length);
   }
 
   getHydrationDataSetByDate(year, month, day) {
@@ -49,8 +49,8 @@ class User {
 
   fluidConsumedPerWeek(year, month, day) {
     let dataset = this.getHydrationDataSetByDate(year, month, day);
-    let startDay = this.hydrationData.indexOf(dataset);
-    let week = this.hydrationData.slice(startDay, (startDay + 7));
+    let endDay = this.hydrationData.indexOf(dataset);
+    let week = this.hydrationData.slice(endDay - 7, endDay );
     return week.map(day => {
       let newValue = {date: day.date, numOunces: day.numOunces};
       return newValue;
