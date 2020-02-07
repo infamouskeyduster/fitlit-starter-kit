@@ -37,8 +37,33 @@ describe('User class object', function () {
       },
       {
         userID: 1,
+        date: '2019/06/16',
+        numOunces: 96,
+      },
+      {
+        userID: 1,
         date: '2019/06/17',
         numOunces: 96,
+      },
+      {
+        userID: 1,
+        date: '2019/06/18',
+        numOunces: 37,
+      },
+      {
+        userID: 1,
+        date: '2019/06/19',
+        numOunces: 37,
+      },
+      {
+        userID: 1,
+        date: '2019/06/20',
+        numOunces: 37,
+      },
+      {
+        userID: 1,
+        date: '2019/06/21',
+        numOunces: 37,
       },
     ];
     userRepository = new UserRepository(userData, hydrationData);
@@ -92,21 +117,28 @@ describe('User class object', function () {
                     return total;
                   }, 0);
       avgFluidConsumed = totalFluidConsumed / hydrationDataUser1.length;
+      user.findUserData(user.id, userRepository, 'hydrationData');
     });
 
     it('Should have a method that returns the user\'s Hydration Data', function () {
-      user.findUserData(user.id, userRepository, 'hydrationData');
       expect(user.hydrationData).to.deep.equal(hydrationDataUser1);
     });
 
-    it('Should have a method that returns the user\'s average fluid consumption per day', function(){
-      user.findUserData(user.id, userRepository, 'hydrationData');
+    it('Should have a method that returns the user\'s average fluid consumption per day', function () {
       expect(user.avgFluidConsumed()).to.equal(avgFluidConsumed);
     });
 
-    it('Should have a method that returns the fl oz consumed based on a specific date', function(){
-      user.findUserData(user.id, userRepository, 'hydrationData');
+    it('Should have a method that returns the fl oz consumed based on a specific date', function () {
       expect(user.fluidConsumedByDay(2019, 06, 17)).to.equal(96);
     });
+
+    it('Should have a mehtod that return the fluids consumed each day for a week', function () {
+      let weekOfHydration = user.hydrationData.map(day => {
+        let newValue = {date: day.date, numOunces: day.numOunces};
+        return newValue;
+      });
+      expect(user.fluidConsumedPerWeek(2019, 6, 15)).to.deep.equal(weekOfHydration);
+    });
+
   });
 });
