@@ -1,25 +1,48 @@
 const chai = require('chai');
 const expect = chai.expect;
 const User = require('../src/User');
+const UserRepository = require('../src/user-repository');
 
 describe('User class object', function () {
   let user;
+  let userRepository;
+  let hydrationData;
+  let userData;
   beforeEach(function () {
-    userData =
-    {
-      id: 1,
-      name: 'Luisa Hane',
-      address: '15195 Nakia Tunnel, Erdmanport VA 19901-1697',
-      email: 'Diana.Hayes1@hotmail.com',
-      strideLength: 4.3,
-      dailyStepGoal: 10000,
-      friends: [
-        16,
-        4,
-        8,
-      ],
-    };
-    user = new User(userData);
+    userData = [
+      {
+        id: 1,
+        name: 'Luisa Hane',
+        address: '15195 Nakia Tunnel, Erdmanport VA 19901-1697',
+        email: 'Diana.Hayes1@hotmail.com',
+        strideLength: 4.3,
+        dailyStepGoal: 10000,
+        friends: [
+          16,
+          4,
+          8,
+        ],
+      },
+    ];
+    hydrationData = [
+      {
+        userID: 1,
+        date: '2019/06/15',
+        numOunces: 37,
+      },
+      {
+        userID: 2,
+        date: '2019/06/16',
+        numOunces: 69,
+      },
+      {
+        userID: 1,
+        date: '2019/06/17',
+        numOunces: 96,
+      },
+    ];
+    userRepository = new UserRepository(userData, hydrationData);
+    user = new User(userRepository.findUser(1));
   });
 
   it('Should be a function', function () {
@@ -54,8 +77,36 @@ describe('User class object', function () {
     expect(user.friends).to.deep.equal([16, 4, 8]);
   });
 
-  it('Should have a method that returns the user\'s  First Name ', function () {
+  it('Should have a method that returns the user\'s First Name', function () {
     expect(user.showUserFirstName()).to.equal('Luisa');
   });
 
+  describe('Hydration Data on User Obj', function () {
+    let hydrationDataUser1;
+    let totalFluidConsumed;
+    let avgFluidConsumed;
+    beforeEach(function(){
+      hydrationDataUser1 = hydrationData.filter(data => data.userID === 1);
+      totalFluidConsumed = hydrationDataUser1.reduce((total, flOz) => {
+                    total += flOz.numOunces;
+                    return total;
+                  }, 0);
+      avgFluidConsumed = totalFluidConsumed / hydrationDataUser1.length;
+    });
+
+    it('Should have a method that returns the user\'s Hydration Data', function () {
+      user.findUserData(user.id, userRepository, 'hydrationData');
+      expect(user.hydrationData).to.deep.equal(hydrationDataUser1);
+    });
+
+    it('Should have a method that returns the user\'s average fluid consumption per day', function(){
+      user.findUserData(user.id, userRepository, 'hydrationData');
+      expect(user.avgFluidConsumed()).to.equal(avgFluidConsumed);
+    });
+
+    it('Should have a method that returns the fl oz consumed based on a specific date', function(){
+      user.findUserData(user.id, userRepository, 'hydrationData');
+      expect(user.fluidConsumedByDay(2019, 06, 17)).to.equal(96);
+    });
+  });
 });
