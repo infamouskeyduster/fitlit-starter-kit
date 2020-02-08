@@ -194,12 +194,28 @@ describe('User class object', function () {
       user.findUserData(user.id, userRepository, 'sleepData');
   });
 
-  it('should be able to return the average hrs slept for all time', function(){
+  it('should be able to return the average hrs slept for a given time period', function(){
     expect(user.avgSleep(sleepDataUser1, 'hoursSlept')).to.equal(6.9);
   });
 
-  it('should be able to return the average sleep quality for all time', function(){
+  it('should be able to return the average sleep quality for a given time period', function(){
     expect(user.avgSleep(sleepDataUser1, 'sleepQuality')).to.equal(3.4);
+  });
+
+  it('Should show how many hours they slept for a specific day', function(){
+    expect(user.sleepStatByDay(2019, 6, 21, 'hoursSlept')).to.equal(5.1);
+  });
+
+  it('Should show a user\'s sleep quality for a specific day (identified by a date)', function(){
+    expect(user.sleepStatByDay(2019, 6, 21, 'sleepQuality')).to.equal(2.6);
+  });
+
+  it('Should show how many hours slept & quality each day over the course of a given week (7 days)', function(){
+    expect(user.sleepPerWeek(2019, 6, 21)).to.deep.equal(sleepData.map(day => {
+      let newValue = { date: day.date, hoursSlept: day.hoursSlept,
+        sleepQuality: day.sleepQuality, };
+      return newValue;
+    }));
   });
 
 

@@ -84,15 +84,16 @@ class User {
     return dataset[dataType];
   }
 
-  // fluidConsumedPerWeek(year, month, day) {
-  //   let dataset = this.getDataSetByDate(year, month, day, this.hydrationData);
-  //   let endDay = this.hydrationData.indexOf(dataset);
-  //   let week = this.hydrationData.slice(endDay - 6, endDay + 1);
-  //   return week.map(day => {
-  //     let newValue = {date: day.date, numOunces: day.numOunces};
-  //     return newValue;
-  //   });
-  // }
+  sleepPerWeek(year, month, day) {
+    let dataset = this.getDataSetByDate(year, month, day, this.sleepData);
+    let endDay = this.sleepData.indexOf(dataset);
+    let week = this.sleepData.slice(endDay - 6, endDay + 1);
+    return week.map(day => {
+      let newValue = { date: day.date, hoursSlept: day.hoursSlept,
+        sleepQuality: day.sleepQuality, };
+      return newValue;
+    });
+  }
 
 }
 
