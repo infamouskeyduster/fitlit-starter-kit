@@ -38,7 +38,7 @@ function postWaterData() {
 waterSection.innerHTML = ''
 let period = timePeriodHelper()
 waterSection.insertAdjacentHTML('afterbegin',
-`<h5>${waterDateSelection.value}'s Consumption</h5>
+`<h5>${waterDateSelection.value} Consumption</h5>
 <img src="../assets/1444858-running/svg/035-water-bottle.svg" alt="035-water-bottle">
 <h4>${period}<span>oz</span></h4>`) ;
 }
