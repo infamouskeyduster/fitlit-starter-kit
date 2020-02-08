@@ -73,9 +73,9 @@ class User {
   avgSleep(dataset, dataType) {
     let total = dataset.reduce((acc, currentValue) => {
                   acc += currentValue[dataType];
-                  return total;
+                  return acc;
                 }, 0);
-    return parseInt((total / dataset.length).toFixed(1));
+    return parseFloat((total / dataset.length).toFixed(1));
   }
 
   //for both amount slept per day & sleep quality per day
