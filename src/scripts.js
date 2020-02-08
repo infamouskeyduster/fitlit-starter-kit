@@ -3,8 +3,11 @@ let user = new User(userRepository.findUser(pickAUser()))
 const userGreeting = document.querySelector('.username-js')
 const userInfoSection = document.querySelector('.user-info-js')
 const dateSection = document.querySelector('.date-js')
-const waterSection = document.querySelector('.user-water-js')
-const waterDateSelection = document.querySelector('.selection-box-js')
+const waterSection = document.querySelector('.user-water-info-js')
+const waterSectionContainer = document.querySelector('.user-water-js')
+let waterDateSelection = document.querySelector('.selection-box-js')
+
+waterSectionContainer.addEventListener('change', postWaterData)
 
 function pickAUser() {
   return Math.ceil(Math.random() * 50)
@@ -26,20 +29,16 @@ postWaterData()
 
 function timePeriodHelper(data) {
   let yearMonthDay = splitTodaysDay()
-  let period = (waterDateSelection.value === 'day') ? user.fluidConsumedByDay(yearMonthDay[0], yearMonthDay[1], yearMonthDay[2]) : user.fluidConsumedPerWeek(yearMonthDay[0], yearMonthDay[1], yearMonthDay[2])
+  let period = (waterDateSelection.value === 'Today') ? user.fluidConsumedByDay(yearMonthDay[0], yearMonthDay[1], yearMonthDay[2]) : user.avgFluidConsumed(user.fluidConsumedPerWeek(yearMonthDay[0], yearMonthDay[1], yearMonthDay[2]))
   return period
 }
 
 
 function postWaterData() {
-waterSection.innerHTML =
-`<select class="selection-box-js" name="">
-  <option value="day">Day</option>
-  <option value="week">Week</option>
-</select>`
+waterSection.innerHTML = ''
 let period = timePeriodHelper()
 waterSection.insertAdjacentHTML('afterbegin',
-`<h5>Today's Water Consumption</h5>
+`<h5>${waterDateSelection.value} Consumption</h5>
 <img src="../assets/1444858-running/svg/035-water-bottle.svg" alt="035-water-bottle">
 <h4>${period}<span>oz</span></h4>`) ;
 }

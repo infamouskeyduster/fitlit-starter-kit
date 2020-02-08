@@ -104,32 +104,52 @@ li {
 
 }
 
-.user-water {
-  grid-area: d;
+.user-water,
+.user-water-info {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
 }
 
-.user-water h4 {
+.user-water {
+  grid-area: d;
+  justify-content: center;
+}
+
+.user-water select {
+  border: solid 2px #93032E;
+  color: #93032E;
+  background:none;
+  font-size: 1rem;
+}
+
+.user-water select:focus {
+  outline: none;
+}
+
+.user-water-info {
+  height: 90%;
+}
+
+.user-water-info h4 {
   font-family: 'Montserrat', sans-serif;
   font-size: 2.75rem;
 }
 
-.user-water span {
+.user-water-info span {
   font-family: 'Taviraj', serif;
   font-size: 2.25rem;
 }
 
-.user-water h5 {
+.user-water-info h5 {
   font-size: 1.3rem;
 }
 
-.user-water img {
+.user-water-info img {
   display: block;
   width: 41%;
-  height: 41%;
+  height: 45%;
   border: solid;
   border-radius: 110px;
   padding: 0% 9%;
