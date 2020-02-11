@@ -27,11 +27,26 @@ class UserRepository {
     return parseFloat((total / dailySleepQuality.length).toFixed(1));
   }
 
-  grabDataSet(year, month, day) {
-    let allData = [];
+  stringifyDate(year, month, day) {
     let monthUnder10 = (month < 10) ? '0' : '';
     let dayUnder10 = (day < 10) ? '0' : '';
     let date = `${year}/${monthUnder10}${month}/${dayUnder10}${day}`;
+    return date;
+  }
+
+  grabDataSetByDay(year, month, day) {
+    let allData = [];
+    let date = this.stringifyDate(year, month, day);
+    this.users.forEach(user => {
+      let userSleepData = this.sleepData.find(data => data.date === date && data.userID === user.id);
+      allData.push(userSleepData);
+    });
+    return allData;
+  }
+
+  grabDataSetByWeek(year, month, day) {
+    let allData = [];
+    let date = this.stringifyDate(year, month, day);
     this.users.forEach(user => {
       let dataset = this.sleepData.filter(el => el.userID === user.id);
       let startDate = dataset.find(day => day.date === date);
@@ -42,7 +57,7 @@ class UserRepository {
   }
 
   findGoodSleepers(year, month, day) {
-    let dataset = this.grabDataSet(year, month, day);
+    let dataset = this.grabDataSetByWeek(year, month, day);
     dataset = dataset.map(data => {
       return data.reduce((acc, currentValue) => {
         acc.userID = currentValue.userID
@@ -57,6 +72,12 @@ class UserRepository {
     });
 
     return dataset.filter(data => data.avgSleepQuality >= 3);
+  }
+
+  findUserWhoSleptMost(year, month, day) {
+    let dataset = [...this.grabDataSetByDay(year, month, day)];
+    dataset.sort((a, b) => a.hoursSlept - b.hoursSlept);
+    return dataset.filter(data => data.hoursSlept === dataset[dataset.length - 1].hoursSlept);
   }
 }
 
