@@ -5,10 +5,10 @@ const userInfoSection = document.querySelector('.user-info-js')
 const dateSection = document.querySelector('.date-js')
 const waterSection = document.querySelector('.user-water-info-js')
 const waterSectionContainer = document.querySelector('.user-water-js')
-let waterDateSelection = document.querySelector('.selection-water-js')
+const waterDateSelection = document.querySelector('.selection-water-js')
 const sleepSectionContainer = document.querySelector('.user-sleep-js')
 const sleepSection = document.querySelector('.user-sleep-info-js')
-let sleepDateSelection = document.querySelector('.selection-sleep-js')
+const sleepDateSelection = document.querySelector('.selection-sleep-js')
 
 waterSectionContainer.addEventListener('change', postWaterData)
 sleepSectionContainer.addEventListener('change', postSleepData)
@@ -34,8 +34,8 @@ postWaterData();
 postSleepData()
 
 function timePeriodHelperWaterMessage() {
-  let yearMonthDay = splitTodaysDay();
-  let period = (waterDateSelection.value === 'Today\'s') ? user.fluidConsumedByDay(yearMonthDay[0], yearMonthDay[1], yearMonthDay[2]) : user.avgFluidConsumed(user.fluidConsumedPerWeek(yearMonthDay[0], yearMonthDay[1], yearMonthDay[2]));
+  let date = splitTodaysDay();
+  let period = (waterDateSelection.value === 'Today\'s') ? user.fluidConsumedByDay(date[0], date[1], date[2]) : user.avgFluidConsumed(user.fluidConsumedPerWeek(date[0], date[1], date[2]));
   return period;
 }
 
@@ -49,17 +49,17 @@ function postWaterData() {
 }
 
 function timePeriodHelperSleepMessage() {
-  let yearMonthDay = splitTodaysDay();
+  let date = splitTodaysDay();
   switch (sleepDateSelection.value) {
     case 'Today\'s':
       return {
-        hoursSlept: user.sleepStatByDay(yearMonthDay[0], yearMonthDay[1], yearMonthDay[2], 'hoursSlept'),
-          sleepQuality: user.sleepStatByDay(yearMonthDay[0], yearMonthDay[1], yearMonthDay[2], 'sleepQuality'),
+        hoursSlept: user.sleepStatByDay(date[0], date[1], date[2], 'hoursSlept'),
+          sleepQuality: user.sleepStatByDay(date[0], date[1], date[2], 'sleepQuality'),
       };
     case 'This Week\'s Avg':
       return {
-        hoursSlept: user.avgSleep(user.sleepPerWeek(yearMonthDay[0], yearMonthDay[1], yearMonthDay[2]), 'hoursSlept'),
-          sleepQuality: user.avgSleep(user.sleepPerWeek(yearMonthDay[0], yearMonthDay[1], yearMonthDay[2]), 'sleepQuality'),
+        hoursSlept: user.avgSleep(user.sleepPerWeek(date[0], date[1], date[2]), 'hoursSlept'),
+          sleepQuality: user.avgSleep(user.sleepPerWeek(date[0], date[1], date[2]), 'sleepQuality'),
       };
     case 'All Time\'s Avg':
       return {
@@ -71,13 +71,13 @@ function timePeriodHelperSleepMessage() {
 
 function postSleepData() {
   sleepSection.innerHTML = ''
-  let period = timePeriodHelperSleepMessage();
+  let sleepInfo = timePeriodHelperSleepMessage();
   sleepSection.insertAdjacentHTML('afterbegin',
     `<h5>${sleepDateSelection.value} sleep</h5>
     <img src='../assets/1444858-running/svg/sleep.svg' alt='sleep-icon'>
     <div class= 'sleep-stats'>
-      <h4>${period.hoursSlept} <span>Hours</span></h4>
-      <h4><span>Quality Rating:</span> ${period.sleepQuality} </h4>
+      <h4>${sleepInfo.hoursSlept} <span>Hours</span></h4>
+      <h4><span>Quality Rating:</span> ${sleepInfo.sleepQuality} </h4>
     </div>`);
 }
 
