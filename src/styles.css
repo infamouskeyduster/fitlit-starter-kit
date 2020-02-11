@@ -104,6 +104,9 @@ li {
 
 }
 
+.sleep-stats,
+.user-sleep,
+.user-sleep-info,
 .user-water,
 .user-water-info {
   display: flex;
@@ -114,10 +117,9 @@ li {
 
 .user-water {
   grid-area: d;
-  justify-content: center;
 }
 
-.user-water select {
+  select {
   border: solid 2px #93032E;
   color: #93032E;
   background:none;
@@ -128,24 +130,37 @@ li {
   outline: none;
 }
 
+.user-sleep-info,
 .user-water-info {
   height: 90%;
 }
 
+.user-sleep-info h4,
 .user-water-info h4 {
   font-family: 'Montserrat', sans-serif;
   font-size: 2.75rem;
 }
 
+.user-sleep-info h4 {
+  font-size: 1.2rem;
+}
+
+.user-sleep-info span,
 .user-water-info span {
   font-family: 'Taviraj', serif;
   font-size: 2.25rem;
 }
 
+.user-sleep-info span {
+  font-size: 1rem;
+}
+
+.user-sleep-info h5,
 .user-water-info h5 {
   font-size: 1.3rem;
 }
 
+.user-sleep-info img,
 .user-water-info img {
   display: block;
   width: 41%;
@@ -153,6 +168,12 @@ li {
   border: solid;
   border-radius: 110px;
   padding: 0% 9%;
+}
+
+.user-sleep-info img {
+  width: 59%;
+  height: 45%;
+  padding: 0px 12%;
 }
 
 .user-sleep {
