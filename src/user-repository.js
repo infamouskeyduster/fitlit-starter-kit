@@ -1,8 +1,8 @@
 class UserRepository {
-  constructor(userData, hydrationData) {
+  constructor(userData, hydrationData, sleepData) {
     this.users = userData;
     this.hydrationData = hydrationData;
-    // this.sleep = sleepData;
+    this.sleepData = sleepData;
   }
 
   findUser(userId) {
@@ -16,6 +16,68 @@ class UserRepository {
       return total;
     }, 0);
     return Math.round(total / dailyStepGoals.length);
+  }
+
+  calcAverageSleepQualityAll() {
+    let dailySleepQuality = this.sleepData.map(user => user.sleepQuality);
+    let total = dailySleepQuality.reduce((totalRating, rating) => {
+      totalRating += rating;
+      return totalRating;
+    }, 0);
+    return parseFloat((total / dailySleepQuality.length).toFixed(1));
+  }
+
+  stringifyDate(year, month, day) {
+    let monthUnder10 = (month < 10) ? '0' : '';
+    let dayUnder10 = (day < 10) ? '0' : '';
+    let date = `${year}/${monthUnder10}${month}/${dayUnder10}${day}`;
+    return date;
+  }
+
+  grabDataSetByDay(year, month, day) {
+    let allData = [];
+    let date = this.stringifyDate(year, month, day);
+    this.users.forEach(user => {
+      let userSleepData = this.sleepData.find(data => data.date === date && data.userID === user.id);
+      allData.push(userSleepData);
+    });
+    return allData;
+  }
+
+  grabDataSetByWeek(year, month, day) {
+    let allData = [];
+    let date = this.stringifyDate(year, month, day);
+    this.users.forEach(user => {
+      let dataset = this.sleepData.filter(el => el.userID === user.id);
+      let startDate = dataset.find(day => day.date === date);
+      let startDay = dataset.indexOf(startDate);
+      allData.push(dataset.slice(startDay - 6, startDay + 1));
+    });
+    return allData;
+  }
+
+  findGoodSleepers(year, month, day) {
+    let dataset = this.grabDataSetByWeek(year, month, day);
+    dataset = dataset.map(data => {
+      return data.reduce((acc, currentValue) => {
+        acc.userID = currentValue.userID
+        let sleepQuality = (currentValue.sleepQuality / 7);
+        acc.avgSleepQuality += Number(sleepQuality);
+        return acc;
+      }, {
+
+        userID: 0,
+        avgSleepQuality: 0,
+      });
+    });
+
+    return dataset.filter(data => data.avgSleepQuality >= 3);
+  }
+
+  findUserWhoSleptMost(year, month, day) {
+    let dataset = [...this.grabDataSetByDay(year, month, day)];
+    dataset.sort((a, b) => a.hoursSlept - b.hoursSlept);
+    return dataset.filter(data => data.hoursSlept === dataset[dataset.length - 1].hoursSlept);
   }
 }
 

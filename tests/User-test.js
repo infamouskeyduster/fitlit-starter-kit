@@ -8,6 +8,7 @@ describe('User class object', function () {
   let userRepository;
   let hydrationData;
   let userData;
+  let sleepData;
   beforeEach(function () {
     userData = [
       {
@@ -66,7 +67,51 @@ describe('User class object', function () {
         numOunces: 37,
       },
     ];
-    userRepository = new UserRepository(userData, hydrationData);
+    sleepData = [
+      {
+        "userID": 1,
+        "date": "2019/06/15",
+        "hoursSlept": 6.1,
+        "sleepQuality": 2.2
+      },
+      {
+        "userID": 1,
+        "date": "2019/06/16",
+        "hoursSlept": 7,
+        "sleepQuality": 4.7
+      },
+      {
+        "userID": 1,
+        "date": "2019/06/17",
+        "hoursSlept": 10.8,
+        "sleepQuality": 4.7
+      },
+      {
+        "userID": 1,
+        "date": "2019/06/18",
+        "hoursSlept": 5.4,
+        "sleepQuality": 3
+      },
+      {
+        "userID": 1,
+        "date": "2019/06/19",
+        "hoursSlept": 4.1,
+        "sleepQuality": 3.6
+      },
+      {
+        "userID": 1,
+        "date": "2019/06/20",
+        "hoursSlept": 9.6,
+        "sleepQuality": 2.9
+      },
+      {
+        "userID": 1,
+        "date": "2019/06/21",
+        "hoursSlept": 5.1,
+        "sleepQuality": 2.6
+      },
+    ];
+    userRepository = new UserRepository(userData, hydrationData, sleepData);
     user = new User(userRepository.findUser(1));
   });
 
@@ -116,7 +161,7 @@ describe('User class object', function () {
                     total += flOz.numOunces;
                     return total;
                   }, 0);
-      avgFluidConsumed = totalFluidConsumed / hydrationDataUser1.length;
+      avgFluidConsumed = Math.trunc(totalFluidConsumed / hydrationDataUser1.length);
       user.findUserData(user.id, userRepository, 'hydrationData');
     });
 
@@ -125,7 +170,7 @@ describe('User class object', function () {
     });
 
     it('Should have a method that returns the user\'s average fluid consumption per day', function () {
-      expect(user.avgFluidConsumed()).to.equal(avgFluidConsumed);
+      expect(user.avgFluidConsumed(hydrationDataUser1)).to.equal(avgFluidConsumed);
     });
 
     it('Should have a method that returns the fl oz consumed based on a specific date', function () {
@@ -137,8 +182,42 @@ describe('User class object', function () {
         let newValue = {date: day.date, numOunces: day.numOunces};
         return newValue;
       });
-      expect(user.fluidConsumedPerWeek(2019, 6, 15)).to.deep.equal(weekOfHydration);
+      expect(user.fluidConsumedPerWeek(2019, 6, 21)).to.deep.equal(weekOfHydration);
     });
+
+  });
+
+  describe('Sleep Data on User Obj', function () {
+    let sleepDataUser1;
+    beforeEach(function(){
+      sleepDataUser1 = sleepData.filter(data => data.userID === 1);
+      user.findUserData(user.id, userRepository, 'sleepData');
+  });
+
+  it('should be able to return the average hrs slept for a given time period', function(){
+    expect(user.avgSleep(sleepDataUser1, 'hoursSlept')).to.equal(6.9);
+  });
+
+  it('should be able to return the average sleep quality for a given time period', function(){
+    expect(user.avgSleep(sleepDataUser1, 'sleepQuality')).to.equal(3.4);
+  });
+
+  it('Should show how many hours they slept for a specific day', function(){
+    expect(user.sleepStatByDay(2019, 6, 21, 'hoursSlept')).to.equal(5.1);
+  });
+
+  it('Should show a user\'s sleep quality for a specific day (identified by a date)', function(){
+    expect(user.sleepStatByDay(2019, 6, 21, 'sleepQuality')).to.equal(2.6);
+  });
+
+  it('Should show how many hours slept & quality each day over the course of a given week (7 days)', function(){
+    expect(user.sleepPerWeek(2019, 6, 21)).to.deep.equal(sleepData.map(day => {
+      let newValue = { date: day.date, hoursSlept: day.hoursSlept,
+        sleepQuality: day.sleepQuality, };
+      return newValue;
+    }));
+  });
+
 
   });
 });
