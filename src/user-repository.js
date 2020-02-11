@@ -46,7 +46,6 @@ class UserRepository {
     dataset = dataset.map(data => {
       return data.reduce((acc, currentValue) => {
         acc.userID = currentValue.userID
-        console.log(typeof currentValue.sleepQuality);
         let sleepQuality = (currentValue.sleepQuality / 7);
         acc.avgSleepQuality += Number(sleepQuality);
         return acc;

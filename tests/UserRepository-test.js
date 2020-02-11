@@ -6,24 +6,81 @@ describe('User Repository', function () {
   let userRepository;
   let userData;
   let hydrationData;
+  let sleepData;
   beforeEach(function () {
+    sleepData = [
+      {
+        userID: 1,
+        date : "2019/06/15",
+        hoursSlept : 6.1,
+        sleepQuality : 2.2
+      },
+      {
+         userID : 2,
+         date : "2019/06/15",
+         hoursSlept : 7,
+         sleepQuality : 4.7,
+      },
+      {
+         userID : 1,
+         date : "2019/06/16",
+         hoursSlept : 10.8,
+         sleepQuality : 4.7
+      },
+      {
+         userID : 1,
+         date : "2019/06/17",
+         hoursSlept : 5.4,
+         sleepQuality : 3,
+      },
+      {
+         userID : 1,
+         date : "2019/06/18",
+         hoursSlept : 5.4,
+         sleepQuality : 3,
+      },
+      {
+         userID : 1,
+         date : "2019/06/19",
+         hoursSlept : 5.4,
+         sleepQuality : 3,
+      },
+      {
+         userID : 1,
+         date : "2019/06/20",
+         hoursSlept : 5.4,
+         sleepQuality : 3,
+      },
+      {
+         userID : 1,
+         date : "2019/06/21",
+         hoursSlept : 5.4,
+         sleepQuality : 3,
+      },
+      {
+         userID : 1,
+         date : "2019/06/22",
+         hoursSlept : 5.4,
+         sleepQuality : 3,
+      },
+    ];
     hydrationData = [
       {
-        "userID": 1,
-        "date": "2019/06/15",
-        "numOunces": 37
+         userID : 1,
+         date : "2019/06/15",
+         numOunces : 37
       },
       {
-        "userID": 2,
-        "date": "2019/06/16",
-        "numOunces": 69
+         userID : 2,
+         date : "2019/06/16",
+         numOunces : 69
       },
       {
-        "userID": 1,
-        "date": "2019/06/17",
-        "numOunces": 96
+         userID : 1,
+         date : "2019/06/17",
+         numOunces : 96
       },
-    ]
+    ];
     userData = [
       {
         id: 1,
@@ -67,7 +124,7 @@ describe('User Repository', function () {
         ],
       },
     ];
-    userRepository = new UserRepository(userData);
+    userRepository = new UserRepository(userData, hydrationData, sleepData);
   });
 
   it('Should be a function', function () {
@@ -82,10 +139,32 @@ describe('User Repository', function () {
     expect(userRepository.findUser(3)).to.equal(userData[2]);
   });
 
-  it('Should have a method that determines: The average step goal amongst all users', function(){
+  it('Should have a method that determines: The average step goal amongst all users', function () {
     expect(userRepository.calculateStepGoalAverage()).to.equal(6667);
   });
 
+  it('Should have a method that calculates the average sleep quality of all users', function () {
+    expect(userRepository.calcAverageSleepQualityAll()).to.equal(3.3);
+  });
 
+  it('Should have a method that finds the best sleepers over the course of a week', function () {
+    userData = [
+      {
+      id: 1,
+      name: 'Luisa Hane',
+      address: '15195 Nakia Tunnel, Erdmanport VA 19901-1697',
+      email: 'Diana.Hayes1@hotmail.com',
+      strideLength: 4.3,
+      dailyStepGoal: 10000,
+      friends: [
+        16,
+        4,
+        8,
+      ],
+    },
+    ]
+    userRepository = new UserRepository(userData, hydrationData, sleepData);
+    expect(userRepository.findGoodSleepers(2019, 6, 22)).to.deep.equal([{"avgSleepQuality": 3.2428571428571424, "userID": 1}]);
+  });
 
 });
