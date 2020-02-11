@@ -1,7 +1,7 @@
 /* css reset specific rules */
 * {
-  margin: 0;
   box-sizing: border-box;
+  margin: 0;
   padding: 0;
   border: none;
 }
@@ -10,10 +10,7 @@
 font-family: 'Taviraj', serif;
 font-family: 'Montserrat', sans-serif;
 font-family: 'Metrophobic', sans-serif; */
-
-
 /*Color pallet #EFFDF0 #CDD84F #93032E #114B5F #31B186*/
-
 html,
 body {
   width: 100%;
@@ -21,54 +18,54 @@ body {
 }
 
 body {
-  background:#114B5F;
-  color: #CDD84F;
   padding: 0em 4.25rem;
+  background: #114B5F;
+  color: #CDD84F;
 }
 
 nav {
   display: flex;
   align-items: baseline;
-  font-size: 1.5rem;
   justify-content: space-between;
   padding: 2.5rem 0rem 1.5rem;
   font-family: 'Taviraj', serif;
+  font-size: 1.5rem;
 }
 
 nav h1 {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  font-size: 3.5rem;
   color: #31B186;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 700;
 }
 
 .icon {
   width: 2rem;
 }
-main {
-  display: grid;
-  width: 100%;
-  grid-template-areas:
-            "a a c b"
-            "d e c f";
-  grid-auto-rows: 20rem;
-  grid-auto-columns: 20rem;
-  grid-gap: .5rem;
 
+main {
+  grid-gap: .5rem;
+  display: grid;
+  grid-auto-columns: 20rem;
+  grid-auto-rows: 20rem;
+  grid-template-areas:
+    "a a c b"
+    "d e c f";
+  width: 100%;
 }
 
 li {
-  list-style: none;
   margin: .5rem;
   font-size: 1.25rem;
+  list-style: none;
 }
 
 .tile {
-  background: #EFFDF0;
-  color: #93032E;
   width: 100%;
   height: 100%;
   padding: 1rem;
+  background: #EFFDF0;
+  color: #93032E;
   font-family: 'Metrophobic', sans-serif;
 }
 
@@ -90,18 +87,17 @@ li {
 }
 
 .user-info span {
-  display: inline-block ;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
+  display: inline-block;
   width: 100%;
   border-bottom: 2px solid;
+  font-family: 'Montserrat', sans-serif;
   font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 .friend-list {
   grid-area: c;
-
 }
 
 .sleep-stats,
@@ -111,23 +107,25 @@ li {
 .user-water-info {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   align-items: center;
+  justify-content: space-evenly;
 }
 
 .user-water {
   grid-area: d;
 }
 
-  select {
+select {
   border: solid 2px #93032E;
+  background: none;
   color: #93032E;
-  background:none;
   font-size: 1rem;
 }
 
-.user-water select:focus {
+select:focus {
   outline: none;
+  color: #EFFDF0;
+  background: #93032E;
 }
 
 .user-sleep-info,
@@ -165,9 +163,9 @@ li {
   display: block;
   width: 41%;
   height: 45%;
+  padding: 0% 9%;
   border: solid;
   border-radius: 110px;
-  padding: 0% 9%;
 }
 
 .user-sleep-info img {
