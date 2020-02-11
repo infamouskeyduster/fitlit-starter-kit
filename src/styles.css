@@ -131,6 +131,7 @@ select:focus {
 .user-sleep-info,
 .user-water-info {
   height: 90%;
+  width: 100%;
 }
 
 .user-sleep-info h4,
@@ -169,9 +170,9 @@ select:focus {
 }
 
 .user-sleep-info img {
-  width: 61%;
+  width: 41%;
   height: 45%;
-  padding: 0px 12%;
+  padding: 0px 7%;
 }
 
 .user-sleep {
