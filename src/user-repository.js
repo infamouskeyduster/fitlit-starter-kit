@@ -17,6 +17,48 @@ class UserRepository {
     }, 0);
     return Math.round(total / dailyStepGoals.length);
   }
+
+  calcAverageSleepQualityAll() {
+    let dailySleepQuality = this.sleepData.map(user => user.sleepQuality);
+    let total = dailySleepQuality.reduce((totalRating, rating) => {
+      totalRating += rating;
+      return totalRating;
+    }, 0);
+    return parseFloat((total / dailySleepQuality.length).toFixed(1));
+  }
+
+  grabDataSet(year, month, day) {
+    let allData = [];
+    let monthUnder10 = (month < 10) ? '0' : '';
+    let dayUnder10 = (day < 10) ? '0' : '';
+    let date = `${year}/${monthUnder10}${month}/${dayUnder10}${day}`;
+    this.users.forEach(user => {
+      let dataset = this.sleepData.filter(el => el.userID === user.id);
+      let startDate = dataset.find(day => day.date === date);
+      let startDay = dataset.indexOf(startDate);
+      allData.push(dataset.slice(startDay - 6, startDay + 1));
+    });
+    return allData;
+  }
+
+  findGoodSleepers(year, month, day) {
+    let dataset = this.grabDataSet(year, month, day);
+    dataset = dataset.map(data => {
+      return data.reduce((acc, currentValue) => {
+        acc.userID = currentValue.userID
+        console.log(typeof currentValue.sleepQuality);
+        let sleepQuality = (currentValue.sleepQuality / 7);
+        acc.avgSleepQuality += Number(sleepQuality);
+        return acc;
+      }, {
+
+        userID: 0,
+        avgSleepQuality: 0,
+      });
+    });
+
+    return dataset.filter(data => data.avgSleepQuality >= 3);
+  }
 }
 
 if (typeof module !== 'undefined') {
