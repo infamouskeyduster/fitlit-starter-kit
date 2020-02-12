@@ -1,85 +1,30 @@
-# FitLit Starter Kit
+# Activity Tracker
 
-The details of this project are outline in [this project spec](http://frontend.turing.io/projects/fitlit.html).
+## Screen Grabs of Finished Product
+
+## General info
+
+Activity tracker is an application that shows pertinent metrics, and trends for each user's _sleep, hydration,_ and _steps_ data repositories. The application uses these data repositories, and then (using methods on various object Classes) compiles and calculates specifics, so that all the user's information can be displayed on the page's widgets in a meaningful way. This project was created as a paired programming exercise in Front End Engineering Module 2 at _Turing School of Software and Design_ This project demonstrates a comprehension of __TDD__ _test driven development_, __object oriented programming, data structure__ and __analysis__, as well as DOM creation around the analyzed data.
+
+## Learning Goals
+
+* Test Driven development
+* Object Oriented Programming
+* DRY and Re-useable Code
+* Data Analysis
 
 ## Setup
 
-1. Within your group, decide on one person to have the project repository (repo) on their GitHub account. Then, that person should fork this repo - on the top right corner of this page, click the **Fork** button.
-1. Both memebers of the group should clone down the _forked_ repo. Since you don't want to name your project "activity-tracker-starter", you can use an optional argument when you run git clone (you replace the [...] with the terminal command arguments): `git clone [remote-address] [what you want to name the repo]`
-1. Once you have cloned the repo, change into the directory and install the project dependencies. Run `npm install` to install project dependencies.
-1. Run `open src/index.html` in the terminal to see the HTML page (you should see some boilerplate HTML displayed on the page)
-1. Make sure both members of your team are collaborators on the forked repo.
+1. Navigate to the project repository (repo) on GitHub (https://github.com/infamouskeyduster/fitlit-starter-kit). Then, click the __green__ button that reads _'clone or download'_.
+2. Navigate to the CLI (Terminal) on your machine and enter: `git clone [remote-address] [what you want to name the repo]` – replace what is in the [] with the cloned URL and whatever you would like to call the repo.
+3. Once you have cloned the repo, change into the directory and install the project dependencies. Run `npm install` to install project dependencies.
+4. Run `open src/index.html` in the terminal to see the HTML page (you should see some boilerplate HTML displayed on the page).
 
-## Testing
+## Technologies
 
-There is no boilerplate for testing in this starter-kit repo. You will need to set this up yourself. However, if you ran `npm install`, then the tooling you need to start testing is already installed (`mocha` and `chai`).
-
-## Linting Your Code
-
-Run the command in your terminal `npm run lint` to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit, but that's ok - the linter is still running successfully.
-
-Your linter will look only at the JavaScript files you have within the `src` and the `test` directories.
-
-## Data Model
-
-**Users**
-
-```
-[
-  {
-    "id": [number],
-    "name": [string],
-    "address": [string],
-    "email": [string],
-    "strideLength": [number - feet],
-    "dailyStepGoal": [number - steps],
-    "friends": [array - one-way connection to other user(s)]
-  },
-  ...more user data
-]
-```
-
-**Activity**
-
-```
-[
-  {
-    "userID": [number],
-    "date": [string YYYY/MM/DD],
-    "numSteps": [number - steps],
-    "minutesActive": [number - minutes],
-    "flightsOfStairs": [number - flights]
-  },
-  ...more activity data
-]
-```
-
-**Hydration**
-
-```
-[
-  {
-    "userID": [number],
-    "date": [string YYYY/MM/DD],
-    "numOunces": [number - ounces]
-  },
-  ...more hydration data
-]
-```
-
-**Sleep**
-
-```
-[
-  {
-    "userID": [number],
-    "date": [string YYYY/MM/DD],
-    "hoursSlept": [number - hours],
-    "sleepQuality": [number - unitless]
-  },
-  ...more sleep data
-]
-```
-
-
-<div>Icons made by <a href="https://www.flaticon.com/authors/srip" title="srip">srip</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+Project is created with:
+* HTML
+* CSS
+* JavaScript
+* Chart.js
+* _Testing Suite:_ Mocha & Chai
