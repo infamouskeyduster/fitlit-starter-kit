@@ -152,8 +152,17 @@ class User {
 
   showStairClimbingRecord() {
     let dataset = [...this.activityData];
-    let stairNums = dataset.sort((a , b) => a.flightsOfStairs - b.flightsOfStairs);
+    let stairNums = dataset.sort((a, b) => a.flightsOfStairs - b.flightsOfStairs);
     return stairNums[stairNums.length - 1].flightsOfStairs;
+  }
+
+  //---------------------------Friends-----------------------
+  getFriends(repo) {
+    let friendsList = []
+    this.friends.forEach((item) => {
+      friendsList.push(repo.findUser(item))
+    });
+    return friendsList
   }
 
 }

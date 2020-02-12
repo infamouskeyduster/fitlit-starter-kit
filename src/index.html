@@ -1,69 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Activity Tracker</title>
-    <link href="./styles.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Metrophobic|Montserrat:500,700|Taviraj:100i,300i&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <nav>
-      <h2><img class="icon" src="../assets/1444858-running/svg/002-calendar.svg" alt="002-calendar"> <span class="date-js"></span>
-      </h2>
-      <h1>Activity Tracker</h1>
-      <h2>Welcome, <span class="username-js">User</span></h2>
-    </nav>
-    <main>
-      <section class="tile user-info user-info-js">
-      </section>
-      <section class="tile friend-list">
-      </section>
-      <section class="tile user-graph user-chart-js">
-        <canvas id="myChart" class="user-chart-info-js" aria-label="Chart" width="100%" height="40%"></canvas>
-        <select class="selection-chart-js">
-          <option value="Number of Steps">Number of Steps</option>
-          <option value="Minutes Active">Minutes Active</option>
-          <option value="Flights of Stairs">Flights of Stairs</option>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Activity Tracker</title>
+  <link href="./styles.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Metrophobic|Montserrat:500,700|Taviraj:100i,300i&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <nav>
+    <h2><img class="icon" src="../assets/1444858-running/svg/002-calendar.svg" alt="002-calendar"> <span class="date-js"></span>
+    </h2>
+    <h1>Activity Tracker</h1>
+    <h2>Welcome, <span class="username-js">User</span></h2>
+  </nav>
+  <main>
+    <section class="tile user-info user-info-js">
+    </section>
+    <section class="tile friend-list friend-list-js">
+    </section>
+    <section class="tile user-graph user-chart-js">
+      <canvas id="myChart" class="user-chart-info-js" aria-label="Chart" width="100%" height="40%"></canvas>
+      <select class="selection-chart-js">
+        <option value="Number of Steps">Number of Steps</option>
+        <option value="Minutes Active">Minutes Active</option>
+        <option value="Flights of Stairs">Flights of Stairs</option>
+      </select>
+    </section>
+    <section class="tile user-water user-water-js">
+      <div class="user-water-info user-water-info-js">
+      </div>
+      <div>
+        <select class="selection-water-js" name="">
+          <option value="Today's">Today</option>
+          <option value="This Week's Avg">This Week</option>
         </select>
-      </section>
-      <section class="tile user-water user-water-js">
-        <div class="user-water-info user-water-info-js">
-        </div>
-        <div>
-          <select class="selection-water-js" name="">
-            <option value="Today's">Today</option>
-            <option value="This Week's Avg">This Week</option>
-          </select>
-        </div>
-      </section>
-      <section class="tile user-sleep user-sleep-js">
-          <div class="user-sleep-info user-sleep-info-js">
-          </div>
-          <select class="selection-sleep-js" name="">
-            <option value="Today's">Today</option>
-            <option value="This Week's Avg">This Week</option>
-            <option value="All Time Avg">All Time</option>
-            <option value="Time Spent Sleeping">Time Spent Sleeping</option>
-          </select>
-      </section>
-      <section class="tile user-activity user-activity-js">
-        <div class="user-activity-info user-activity-info-js">
-        </div>
-        <select class="selection-activity-js" name="">
-          <option value="Today's Steps">Number of Steps</option>
-          <option value="Today's Active Time">Minutes Active</option>
-          <option value="Today's Distance">Distance Walked</option>
-          <option value="Lifetime Steps">Lifetime Steps</option>
-        </select>
-      </section>
-    </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-    <script src="user-repository.js"></script>
-    <script src="User.js"></script>
-    <script type="text/javascript" src="../data/users.js"></script>
-    <script type="text/javascript" src="../data/hydration.js"></script>
-    <script type="text/javascript" src="../data/sleep.js"></script>
-    <script type="text/javascript" src="../data/activity.js"></script>
-    <script type="text/javascript" src="./scripts.js"></script>
-  </body>
+      </div>
+    </section>
+    <section class="tile user-sleep user-sleep-js">
+      <div class="user-sleep-info user-sleep-info-js">
+      </div>
+      <select class="selection-sleep-js" name="">
+        <option value="Today's">Today</option>
+        <option value="This Week's Avg">This Week</option>
+        <option value="All Time Avg">All Time</option>
+        <option value="Time Spent Sleeping">Time Spent Sleeping</option>
+      </select>
+    </section>
+    <section class="tile user-activity user-activity-js">
+      <div class="user-activity-info user-activity-info-js">
+      </div>
+      <select class="selection-activity-js" name="">
+        <option value="Today's Steps">Number of Steps</option>
+        <option value="Today's Active Time">Minutes Active</option>
+        <option value="Today's Distance">Distance Walked</option>
+        <option value="Lifetime Steps">Lifetime Steps</option>
+      </select>
+    </section>
+  </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+  <script src="user-repository.js"></script>
+  <script src="User.js"></script>
+  <script type="text/javascript" src="../data/users.js"></script>
+  <script type="text/javascript" src="../data/hydration.js"></script>
+  <script type="text/javascript" src="../data/sleep.js"></script>
+  <script type="text/javascript" src="../data/activity.js"></script>
+  <script type="text/javascript" src="./scripts.js"></script>
+</body>
+
 </html>

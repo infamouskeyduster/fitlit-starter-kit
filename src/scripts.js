@@ -15,6 +15,7 @@ const activityDateSelection = document.querySelector('.selection-activity-js');
 const chartSectionContainer = document.querySelector('.user-chart-js');
 const chartSection = document.querySelector('.user-chart-info-js');
 const chartSelection = document.querySelector('.selection-chart-js');
+const friendSection = document.querySelector('.friend-list-js');
 
 waterSectionContainer.addEventListener('change', postWaterData);
 sleepSectionContainer.addEventListener('change', postSleepData);
@@ -42,6 +43,7 @@ postWaterData();
 postSleepData();
 postActivityData();
 postChart();
+postFriends()
 
 function timePeriodHelperWaterMessage() {
   let date = splitTodaysDay();
@@ -171,12 +173,12 @@ function selectActivityChartMetric() {
     default:
     break;
   }
-};
+}
 
 function createMyChartData(metric) {
   let allData = getActivityDataForChart();
   return allData.map(user => user[metric]);
-};
+}
 
 function compareMyChartData(metric) {
   let date = splitTodaysDay();
@@ -248,4 +250,37 @@ function postChart() {
   chartSection.innerHTML = '';
   let ctx = document.getElementById('myChart').getContext('2d');
   let myChart = new Chart(ctx, generateChart());
+}
+
+function friendMessageHelper(friend) {
+  let date = splitTodaysDay()
+  let friend1 = new User(friend)
+  friend1.findAllData(userRepository)
+  let friendActivityData = friend1.getDataSetByDate(date[0], date[1], date[2], 'activityData')
+  return {
+    name: friend1.name,
+    steps: friendActivityData.numSteps
+  }
+}
+function sortFriendslist() {
+  let friendsInfo = [...user.getFriends(userRepository)]
+  friendsInfo = friendsInfo.map(friend => {
+    return friendMessageHelper(friend)
+  });
+  friendsInfo.sort((a, b) => a.steps - b.steps)
+  return friendsInfo
+}
+function postFriends() {
+  friendSection.innerHTML = ''
+  let friendsInfo = [...sortFriendslist()];
+  friendsInfo.forEach(friend => {
+    friendSection.insertAdjacentHTML('afterbegin',
+    `<div class='friend'>
+      <img src="../assets/1444858-running/svg/user.svg" alt="user">
+      <div>
+      <h4>${friend.name} </h4>
+      <h4>${friend.steps} </h4>
+      <div>
+    </div>`);
+  });
 }
