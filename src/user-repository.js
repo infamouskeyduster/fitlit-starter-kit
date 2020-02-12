@@ -58,10 +58,10 @@ class UserRepository {
   }
 
   findGoodSleepers(year, month, day) {
-    let dataset =  this.grabDataSetByWeek(year, month, day, 'sleepData');
+    let dataset = this.grabDataSetByWeek(year, month, day, 'sleepData');
     dataset = dataset.map(data => {
       return data.reduce((acc, currentValue) => {
-        acc.userID = currentValue.userID
+        acc.userID = currentValue.userID;
         let sleepQuality = (currentValue.sleepQuality / 7);
         acc.avgSleepQuality += Number(sleepQuality);
         return acc;
@@ -84,20 +84,32 @@ class UserRepository {
   findAvgOfActityData(year, month, day, dataProperty) {
     let dataset = [...this.grabDataSetByDay(year, month, day, 'activityData')];
     let total = dataset.reduce((acc, currentValue) => {
-      acc += currentValue[dataProperty]
+      acc += currentValue[dataProperty];
       return acc;
     }, 0);
     return Math.round(total / dataset.length);
   }
-}
 
+  findAvgOfActityDataWeek(year, month, day, dataType) {
+    let dataset = [...this.grabDataSetByWeek(year, month, day, 'activityData')];
+    let alldata = dataset.reduce((acc, currentValue) => {
+      acc = acc.concat(currentValue);
+      return acc;
+    }, []);
+    let weekAvgs = [];
+    for (var i = 0; i < 7; i++) {
+      let dataForDay = alldata.filter(day => day.date === dataset[0][i].date);
+      let avgForDay = Math.round(dataForDay.reduce((acc, currentValue) => {
+        acc += currentValue[dataType];
+        return acc;
+      }, 0) / this.users.length);
+      weekAvgs.push(avgForDay);
+    };
+
+    return weekAvgs;
+  }
+}
 
 if (typeof module !== 'undefined') {
   module.exports = UserRepository;
 }
-
-//A UserRepository holds onto all of the User objects
-// It should have a parameter to take in user data
-// It should have methods to determine:
-// Given a user’s ID, what is their user data?
-// The average step goal amongst all users
