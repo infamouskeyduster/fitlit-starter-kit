@@ -1,4 +1,4 @@
-const userRepository = new UserRepository(userData, hydrationData, sleepData);
+const userRepository = new UserRepository(userData, hydrationData, sleepData, activityData);
 let user = new User(userRepository.findUser(pickAUser()))
 const userGreeting = document.querySelector('.username-js')
 const userInfoSection = document.querySelector('.user-info-js')
@@ -35,7 +35,7 @@ postSleepData()
 
 function timePeriodHelperWaterMessage() {
   let date = splitTodaysDay();
-  let period = (waterDateSelection.value === 'Today\'s') ? user.fluidConsumedByDay(date[0], date[1], date[2]) : user.avgFluidConsumed(user.fluidConsumedPerWeek(date[0], date[1], date[2]));
+  let period = (waterDateSelection.value === 'Today\'s') ? user.fluidConsumedByDay(date[0], date[1], date[2], 'hydrationData') : user.avgFluidConsumed(user.fluidConsumedPerWeek(date[0], date[1], date[2]));
   return period;
 }
 
@@ -53,8 +53,8 @@ function timePeriodHelperSleepMessage() {
   switch (sleepDateSelection.value) {
     case 'Today\'s':
       return {
-        hoursSlept: user.sleepStatByDay(date[0], date[1], date[2], 'hoursSlept'),
-          sleepQuality: user.sleepStatByDay(date[0], date[1], date[2], 'sleepQuality'),
+        hoursSlept: user.sleepStatByDay(date[0], date[1], date[2], 'sleepData', 'hoursSlept'),
+          sleepQuality: user.sleepStatByDay(date[0], date[1], date[2], 'sleepData', 'sleepQuality'),
       };
     case 'This Week\'s Avg':
       return {
