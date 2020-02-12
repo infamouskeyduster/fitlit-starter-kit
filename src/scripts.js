@@ -1,25 +1,25 @@
 const userRepository = new UserRepository(userData, hydrationData, sleepData, activityData);
-let user = new User(userRepository.findUser(pickAUser()))
-const userGreeting = document.querySelector('.username-js')
-const userInfoSection = document.querySelector('.user-info-js')
-const dateSection = document.querySelector('.date-js')
-const waterSection = document.querySelector('.user-water-info-js')
-const waterSectionContainer = document.querySelector('.user-water-js')
-const waterDateSelection = document.querySelector('.selection-water-js')
-const sleepSectionContainer = document.querySelector('.user-sleep-js')
-const sleepSection = document.querySelector('.user-sleep-info-js')
-const sleepDateSelection = document.querySelector('.selection-sleep-js')
+let user = new User(userRepository.findUser(pickAUser()));
+const userGreeting = document.querySelector('.username-js');
+const userInfoSection = document.querySelector('.user-info-js');
+const dateSection = document.querySelector('.date-js');
+const waterSection = document.querySelector('.user-water-info-js');
+const waterSectionContainer = document.querySelector('.user-water-js');
+const waterDateSelection = document.querySelector('.selection-water-js');
+const sleepSectionContainer = document.querySelector('.user-sleep-js');
+const sleepSection = document.querySelector('.user-sleep-info-js');
+const sleepDateSelection = document.querySelector('.selection-sleep-js');
 
-waterSectionContainer.addEventListener('change', postWaterData)
-sleepSectionContainer.addEventListener('change', postSleepData)
+waterSectionContainer.addEventListener('change', postWaterData);
+sleepSectionContainer.addEventListener('change', postSleepData);
 
 function pickAUser() {
-  return Math.ceil(Math.random() * 50)
+  return Math.ceil(Math.random() * 50);
 }
 
-dateSection.innerText = '2019/09/22'
+dateSection.innerText = '2019/09/22';
 // getTodaysDate()
-userGreeting.innerText = user.showUserFirstName()
+userGreeting.innerText = user.showUserFirstName();
 userInfoSection.innerHTML = `<ul>
   <li><span>Address</span> ${user.address}</li>
   <li><span>Email</span> ${user.email}</li>
@@ -31,7 +31,7 @@ userInfoSection.innerHTML = `<ul>
 user.findAllData(userRepository);
 // user.findUserData(user.id, userRepository, 'hydrationData');
 postWaterData();
-postSleepData()
+postSleepData();
 
 function timePeriodHelperWaterMessage() {
   let date = splitTodaysDay();
@@ -40,7 +40,7 @@ function timePeriodHelperWaterMessage() {
 }
 
 function postWaterData() {
-  waterSection.innerHTML = ''
+  waterSection.innerHTML = '';
   let period = timePeriodHelperWaterMessage();
   waterSection.insertAdjacentHTML('afterbegin',
     `<h5>${waterDateSelection.value} Consumption</h5>
