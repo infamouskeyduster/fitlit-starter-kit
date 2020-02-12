@@ -18,7 +18,13 @@
       </section>
       <section class="tile friend-list">
       </section>
-      <section class="tile user-graph">
+      <section class="tile user-graph user-chart-js">
+        <select class="selection-chart-js">
+          <option value="Number of Steps">Number of Steps</option>
+          <option value="Minutes Active">Minutes Active</option>
+          <option value="Flights of Stairs">Flights of Stairs</option>
+        </select>
+        <canvas id="myChart" class="user-chart-info-js" width="100%" height="45%"></canvas>
       </section>
       <section class="tile user-water user-water-js">
         <div class="user-water-info user-water-info-js">
@@ -49,6 +55,7 @@
         </select>
       </section>
     </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
     <script src="user-repository.js"></script>
     <script src="User.js"></script>
     <script type="text/javascript" src="../data/users.js"></script>

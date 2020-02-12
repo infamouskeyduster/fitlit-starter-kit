@@ -12,6 +12,9 @@ const sleepDateSelection = document.querySelector('.selection-sleep-js');
 const activitySectionContainer = document.querySelector('.user-activity-js');
 const activitySection = document.querySelector('.user-activity-info-js');
 const activityDateSelection = document.querySelector('.selection-activity-js');
+const chartSectionContainer = document.querySelector('.user-chart-js');
+const chartSection = document.querySelector('.user-chart-info-js');
+const chartSelection = document.querySelector('.selection-chart-js');
 
 waterSectionContainer.addEventListener('change', postWaterData);
 sleepSectionContainer.addEventListener('change', postSleepData);
@@ -128,3 +131,75 @@ function splitTodaysDay() {
   let date = dateSection.innerText;
   return date.split('/').map(el => parseInt(el));
 }
+
+function getActivityDataForChart() {
+  let date = splitTodaysDay();
+  let allData = user.getDataSetByWeek(date[0], date[1], date[2], 'activityData');
+  return allData;
+}
+
+function createMyChartLabels() {
+  let allData = getActivityDataForChart();
+  return allData.map(data => {
+    return data.date.split('2019/')[1];
+  });
+}
+
+function selectActivityChartMetric() {
+  switch (chartSelection.value) {
+    case 'Number of Steps':
+      return createMyChartData('numSteps');
+    case 'Minutes Active':
+      return createMyChartData('minutesActive');
+    case 'Flights of Stairs':
+      return createMyChartData('flightsOfStairs');
+    default:
+    break;
+
+  }
+};
+
+function createMyChartData(metric) {
+  let allData = getActivityDataForChart();
+  return allData.map(user => user[metric]);
+};
+
+let ctx = document.getElementById('myChart').getContext('2d');
+let myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [...createMyChartLabels(), 'VS All Users'],
+        datasets: [{
+            label: `Your ${chartSelection.value} for the week:`,
+            data: [...selectActivityChartMetric(), 2],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.4)',
+                'rgba(54, 162, 235, 0.4)',
+                'rgba(255, 206, 86, 0.4)',
+                'rgba(75, 192, 192, 0.4)',
+                'rgba(153, 102, 255, 0.4)',
+                'rgba(255, 159, 64, 0.4)',
+                'rgba(205, 216, 79, 0.4)',
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(205, 216, 79, 1)',
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
