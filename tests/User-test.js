@@ -19,9 +19,7 @@ describe('User class object', function () {
         strideLength: 4.3,
         dailyStepGoal: 10000,
         friends: [
-          16,
-          4,
-          8,
+          2,
         ],
       },
     ];
@@ -196,7 +194,7 @@ describe('User class object', function () {
   });
 
   it('Should be able to have an friends', function () {
-    expect(user.friends).to.deep.equal([16, 4, 8]);
+    expect(user.friends).to.deep.equal([2]);
   });
 
   it('Should have a method that returns the user\'s First Name', function () {
@@ -275,6 +273,44 @@ describe('User class object', function () {
     });
 
   });
+  describe('Friends', function(){
+    beforeEach(function(){
+      userData = [
+        {
+          id: 1,
+          name: 'Luisa Hane',
+          address: '15195 Nakia Tunnel, Erdmanport VA 19901-1697',
+          email: 'Diana.Hayes1@hotmail.com',
+          strideLength: 4.3,
+          dailyStepGoal: 10000,
+          friends: [
+            2,
+          ],
+        },
+        {
+          id: 2,
+          name: 'Luisa Hane',
+          address: '15195 Nakia Tunnel, Erdmanport VA 19901-1697',
+          email: 'Diana.Hayes1@hotmail.com',
+          strideLength: 4.3,
+          dailyStepGoal: 10000,
+          friends: [
+            2,
+          ],
+        },
+      ];
+
+      userRepository = new UserRepository(userData, hydrationData, sleepData, activityData)
+    });
+
+    it('Should be able to find friends',
+    function(){
+    expect(user.getFriends(userRepository)).to.deep.equal([userData[1]])
+    });
+
+
+  });
+
 
   describe('Activity Data', function(){
     beforeEach(function(){
