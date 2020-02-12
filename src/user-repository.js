@@ -58,7 +58,7 @@ class UserRepository {
   }
 
   findGoodSleepers(year, month, day) {
-    let dataset =  this.grabDataSetByWeek(year, month, day, 'sleepData');
+    let dataset = this.grabDataSetByWeek(year, month, day, 'sleepData');
     dataset = dataset.map(data => {
       return data.reduce((acc, currentValue) => {
         acc.userID = currentValue.userID
@@ -84,13 +84,31 @@ class UserRepository {
   findAvgOfActityData(year, month, day, dataProperty) {
     let dataset = [...this.grabDataSetByDay(year, month, day, 'activityData')];
     let total = dataset.reduce((acc, currentValue) => {
-      acc += currentValue[dataProperty]
+      acc += currentValue[dataProperty];
       return acc;
     }, 0);
     return Math.round(total / dataset.length);
   }
-}
 
+  findAvgOfActityDataWeek(year, month, day, dataType) {
+    let dataset = [...this.grabDataSetByWeek(year, month, day, 'activityData')];
+    let alldata = dataset.reduce((acc, currentValue) => {
+      acc = acc.concat(currentValue);
+      return acc;
+    }, []);
+    let weekAvgs = [];
+    for (var i = 0; i < 7; i++) {
+      let dataForDay = alldata.filter(day => day.date === dataset[0][i].date);
+      let avgForDay = Math.round(dataForDay.reduce((acc, currentValue) => {
+        acc += currentValue[dataType];
+        return acc;
+      }, 0) / this.users.length);
+      weekAvgs.push(avgForDay);
+    };
+
+    return weekAvgs;
+  }
+}
 
 if (typeof module !== 'undefined') {
   module.exports = UserRepository;

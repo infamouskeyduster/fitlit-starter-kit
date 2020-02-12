@@ -76,6 +76,11 @@ function timePeriodHelperSleepMessage() {
         hoursSlept: user.avgSleep(user.sleepData, 'hoursSlept'),
         sleepQuality: user.avgSleep(user.sleepData, 'sleepQuality')
       };
+    case 'Time Spent Sleeping':
+      return {
+        hoursSlept: user.findTotalSleepAllTime(user.sleepData, 'hoursSlept'),
+        sleepQuality: `${user.avgSleep(user.sleepData, 'sleepQuality')} avg`,
+      };
   }
 }
 
@@ -108,6 +113,11 @@ function timePeriodHelperActivityMessage() {
       return {
         metric: user.calculateMiles(date[0], date[1], date[2], 'activityData'),
         message: 'miles',
+      };
+    case 'Lifetime Steps':
+      return {
+        metric: user.calculateAllTimeMileage(),
+        message: 'miles!',
       };
   }
 }
@@ -170,11 +180,12 @@ function createMyChartData(metric) {
 
 function compareMyChartData(metric) {
   let date = splitTodaysDay();
-  let userAverages = [];
-  while (userAverages.length < 7) {
-    let average = userRepository.findAvgOfActityData(date[0], date[1], (date[2] - userAverages.length), metric);
-    userAverages.push(average);
-  }
+  let userAverages = userRepository.findAvgOfActityDataWeek(date[0], date[1], date[2], metric);
+
+  // while (userAverages.length < 7) {
+  //   let average = userRepository.findAvgOfActityData(date[0], date[1], (date[2] - userAverages.length), metric);
+  //   userAverages.push(average);
+  // }
 
   return userAverages;
 }

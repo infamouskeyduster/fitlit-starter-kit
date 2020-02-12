@@ -84,6 +84,14 @@ class User {
     return parseFloat((total / dataset.length).toFixed(1));
   }
 
+  findTotalSleepAllTime(dataset, dataType) {
+    let total = dataset.reduce((acc, currentValue) => {
+      acc += currentValue[dataType];
+      return acc;
+    }, 0);
+    return total.toFixed(1);
+  }
+
   //for both amount slept per day & sleep quality per day
   sleepStatByDay(year, month, day, datasetProperty, dataType) {
     let dataset = this.getDataSetByDate(year, month, day, datasetProperty);
@@ -102,6 +110,15 @@ class User {
     });
   }
   //--------------------------Activity-------------
+  calculateAllTimeMileage() {
+    let allSteps = this.activityData.reduce((acc, currentValue) => {
+      acc += currentValue.numSteps;
+      return acc;
+    }, 0);
+    let distance = parseFloat(((this.strideLength * allSteps) / 5280).toFixed(2));
+    return distance;
+  }
+
   calculateMiles(year, month, day, dataProperty) {
     let dataset = this.getDataSetByDate(year, month, day, dataProperty);
     let distance = parseFloat(((this.strideLength * dataset.numSteps) / 5280).toFixed(2));
