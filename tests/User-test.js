@@ -269,6 +269,11 @@ describe('User class object', function () {
         return newValue;
       }));
     });
+
+    it('Should have a function that calculates the total hrs slept for all time', function(){
+      expect(user.findTotalSleepAllTime(sleepDataUser1, 'hoursSlept')).to.equal('48.1');
+    });
+
   });
 
   describe('Activity Data', function(){
@@ -302,7 +307,8 @@ describe('User class object', function () {
       expect(user.showStairClimbingRecord()).to.deep.equal(33)
     });
 
-
+    it('Should have a mthod that calculates the total mileage walked', function(){
+      expect(user.calculateAllTimeMileage()).to.equal(38.75);
+    });
   });
-
 });

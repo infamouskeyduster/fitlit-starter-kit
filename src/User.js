@@ -1,8 +1,3 @@
-if (typeof module !== 'undefined') {
-  // const UserRepository = require('./user-repository');
-  // const userRepository = new UserRepository();
-}
-
 class User {
   constructor(userData) {
     this.id = userData.id;
@@ -67,7 +62,7 @@ class User {
     return dataset.map(day => {
       let newValue = {
         date: day.date,
-        numOunces: day.numOunces
+        numOunces: day.numOunces,
       };
       return newValue;
     });
@@ -109,6 +104,7 @@ class User {
       return newValue;
     });
   }
+
   //--------------------------Activity-------------
   calculateAllTimeMileage() {
     let allSteps = this.activityData.reduce((acc, currentValue) => {
@@ -137,11 +133,10 @@ class User {
 
   showAvgMinutesActiveWeek(year, month, day, dataProperty) {
     let dataset = this.getDataSetByWeek(year, month, day, dataProperty);
-    console.log(dataset);
     return Math.round(dataset.reduce((acc, currentValue) => {
-      acc += currentValue.minutesActive
-      return acc
-    }, 0) / 7)
+      acc += currentValue.minutesActive;
+      return acc;
+    }, 0) / 7);
   }
 
   stepGoalAchieved(year, month, day, dataProperty) {
@@ -158,7 +153,7 @@ class User {
   showStairClimbingRecord() {
     let dataset = [...this.activityData];
     let stairNums = dataset.sort((a , b) => a.flightsOfStairs - b.flightsOfStairs);
-    return stairNums[stairNums.length - 1].flightsOfStairs
+    return stairNums[stairNums.length - 1].flightsOfStairs;
   }
 
 }

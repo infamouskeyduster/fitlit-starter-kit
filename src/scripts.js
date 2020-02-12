@@ -26,6 +26,7 @@ function pickAUser() {
 }
 
 dateSection.innerText = '2019/09/22';
+
 // getTodaysDate()
 userGreeting.innerText = user.showUserFirstName();
 userInfoSection.innerHTML = `<ul>
@@ -37,7 +38,6 @@ userInfoSection.innerHTML = `<ul>
 </ul>`;
 
 user.findAllData(userRepository);
-// user.findUserData(user.id, userRepository, 'hydrationData');
 postWaterData();
 postSleepData();
 postActivityData();
@@ -160,10 +160,10 @@ function createMyChartLabels() {
 function selectActivityChartMetric() {
   switch (chartSelection.value) {
     case 'Number of Steps':
-      return {userData: createMyChartData('numSteps'),
+      return { userData: createMyChartData('numSteps'),
               allData: compareMyChartData('numSteps')};
     case 'Minutes Active':
-      return {userData: createMyChartData('minutesActive'),
+      return { userData: createMyChartData('minutesActive'),
               allData: compareMyChartData('minutesActive')};
     case 'Flights of Stairs':
       return { userData: createMyChartData('flightsOfStairs'),
@@ -181,12 +181,6 @@ function createMyChartData(metric) {
 function compareMyChartData(metric) {
   let date = splitTodaysDay();
   let userAverages = userRepository.findAvgOfActityDataWeek(date[0], date[1], date[2], metric);
-
-  // while (userAverages.length < 7) {
-  //   let average = userRepository.findAvgOfActityData(date[0], date[1], (date[2] - userAverages.length), metric);
-  //   userAverages.push(average);
-  // }
-
   return userAverages;
 }
 
@@ -228,8 +222,8 @@ function generateChart() {
           pointRadius: 1.5,
           borderColor: 'rgba(147, 3, 46, 1)',
           lineTension: .01,
-        }]
-    },
+        },]
+      },
     options: {
         legend: {
           labels: {
@@ -241,10 +235,10 @@ function generateChart() {
         scales: {
             yAxes: [{
                 ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
+                    beginAtZero: true,
+                  }
+              }]
+          }
       },
   };
   return chartInfo;

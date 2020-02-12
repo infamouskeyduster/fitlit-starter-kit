@@ -61,7 +61,7 @@ class UserRepository {
     let dataset = this.grabDataSetByWeek(year, month, day, 'sleepData');
     dataset = dataset.map(data => {
       return data.reduce((acc, currentValue) => {
-        acc.userID = currentValue.userID
+        acc.userID = currentValue.userID;
         let sleepQuality = (currentValue.sleepQuality / 7);
         acc.avgSleepQuality += Number(sleepQuality);
         return acc;
@@ -113,9 +113,3 @@ class UserRepository {
 if (typeof module !== 'undefined') {
   module.exports = UserRepository;
 }
-
-//A UserRepository holds onto all of the User objects
-// It should have a parameter to take in user data
-// It should have methods to determine:
-// Given a user’s ID, what is their user data?
-// The average step goal amongst all users
