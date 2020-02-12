@@ -258,8 +258,5 @@ describe('User Repository', function() {
     it('Should find avg of all users minutes active on given day', function() {
       expect(userRepository.findAvgOfActityData(2019, 06, 15, 'minutesActive')).to.equal(131)
     });
-
-
   });
-
 });

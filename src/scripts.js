@@ -71,7 +71,7 @@ function timePeriodHelperSleepMessage() {
         hoursSlept: user.avgSleep(user.sleepPerWeek(date[0], date[1], date[2]), 'hoursSlept'),
           sleepQuality: user.avgSleep(user.sleepPerWeek(date[0], date[1], date[2]), 'sleepQuality'),
       };
-    case 'All Time\'s Avg':
+    case 'All Time Avg':
       return {
         hoursSlept: user.avgSleep(user.sleepData, 'hoursSlept'),
         sleepQuality: user.avgSleep(user.sleepData, 'sleepQuality')
@@ -83,7 +83,7 @@ function postSleepData() {
   sleepSection.innerHTML = ''
   let sleepInfo = timePeriodHelperSleepMessage();
   sleepSection.insertAdjacentHTML('afterbegin',
-    `<h5>${sleepDateSelection.value} sleep</h5>
+    `<h5>${sleepDateSelection.value} Sleep</h5>
     <img src='../assets/1444858-running/svg/sleep.svg' alt='sleep-icon'>
     <div class= 'sleep-stats'>
       <h4>${sleepInfo.hoursSlept} <span>Hours</span></h4>
@@ -171,8 +171,8 @@ function createMyChartData(metric) {
 function compareMyChartData(metric) {
   let date = splitTodaysDay();
   let userAverages = [];
-  let average = userRepository.findAvgOfActityData(date[0], date[1], date[2], metric);
   while (userAverages.length < 7) {
+    let average = userRepository.findAvgOfActityData(date[0], date[1], (date[2] - userAverages.length), metric);
     userAverages.push(average);
   }
 
@@ -186,10 +186,11 @@ function generateChart() {
         labels: [...createMyChartLabels()],
         datasets: [{
             fill: false,
-            label: `Your ${chartSelection.value} for the week:`,
+            label: `YOUR ${chartSelection.value} for the week:`,
             data: selectActivityChartMetric().userData,
             borderColor: 'rgba(17, 75, 95, 1)',
             pointRadius: 4,
+            borderWidth: 1,
             pointBackgroundColor: [
                 'rgba(255, 99, 132, 1)',
                 'rgba(54, 162, 235, 1)',
@@ -208,17 +209,24 @@ function generateChart() {
                 'rgba(255, 159, 64, 1)',
                 'rgba(205, 216, 79, 1)',
             ],
-            borderWidth: 1
-        }, {
+          }, {
           fill: false,
-          label: `All users' average ${chartSelection.value}`,
+          label: `All Users' Average ${chartSelection.value}`,
           data: selectActivityChartMetric().allData,
           borderWidth: 1,
           pointRadius: 1.5,
           borderColor: 'rgba(147, 3, 46, 1)',
+          lineTension: .01,
         }]
     },
     options: {
+        legend: {
+          labels: {
+            fontFamily: 'Montserrat',
+            fontStyle: 'bold',
+            fontSize: 10,
+          }
+        },
         scales: {
             yAxes: [{
                 ticks: {
