@@ -19,6 +19,7 @@ const chartSelection = document.querySelector('.selection-chart-js');
 waterSectionContainer.addEventListener('change', postWaterData);
 sleepSectionContainer.addEventListener('change', postSleepData);
 activitySectionContainer.addEventListener('change', postActivityData);
+chartSectionContainer.addEventListener('change', postChart);
 
 function pickAUser() {
   return Math.ceil(Math.random() * 50);
@@ -40,6 +41,7 @@ user.findAllData(userRepository);
 postWaterData();
 postSleepData();
 postActivityData();
+postChart();
 
 function timePeriodHelperWaterMessage() {
   let date = splitTodaysDay();
@@ -148,14 +150,16 @@ function createMyChartLabels() {
 function selectActivityChartMetric() {
   switch (chartSelection.value) {
     case 'Number of Steps':
-      return createMyChartData('numSteps');
+      return {userData: createMyChartData('numSteps'),
+              allData: compareMyChartData('numSteps')};
     case 'Minutes Active':
-      return createMyChartData('minutesActive');
+      return {userData: createMyChartData('minutesActive'),
+              allData: compareMyChartData('minutesActive')};
     case 'Flights of Stairs':
-      return createMyChartData('flightsOfStairs');
+      return { userData: createMyChartData('flightsOfStairs'),
+              allData: compareMyChartData('flightsOfStairs')};
     default:
     break;
-
   }
 };
 
@@ -164,24 +168,38 @@ function createMyChartData(metric) {
   return allData.map(user => user[metric]);
 };
 
-let ctx = document.getElementById('myChart').getContext('2d');
-let myChart = new Chart(ctx, {
-    type: 'bar',
+function compareMyChartData(metric) {
+  let date = splitTodaysDay();
+  let userAverages = [];
+  let average = userRepository.findAvgOfActityData(date[0], date[1], date[2], metric);
+  while (userAverages.length < 7) {
+    userAverages.push(average);
+  }
+
+  return userAverages;
+}
+
+function generateChart() {
+  let chartInfo = {
+    type: 'line',
     data: {
-        labels: [...createMyChartLabels(), 'VS All Users'],
+        labels: [...createMyChartLabels()],
         datasets: [{
+            fill: false,
             label: `Your ${chartSelection.value} for the week:`,
-            data: [...selectActivityChartMetric(), 2],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.4)',
-                'rgba(54, 162, 235, 0.4)',
-                'rgba(255, 206, 86, 0.4)',
-                'rgba(75, 192, 192, 0.4)',
-                'rgba(153, 102, 255, 0.4)',
-                'rgba(255, 159, 64, 0.4)',
-                'rgba(205, 216, 79, 0.4)',
+            data: selectActivityChartMetric().userData,
+            borderColor: 'rgba(17, 75, 95, 1)',
+            pointRadius: 4,
+            pointBackgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(205, 216, 79, 1)',
             ],
-            borderColor: [
+            pointBorderColor: [
                 'rgba(255, 99, 132, 1)',
                 'rgba(54, 162, 235, 1)',
                 'rgba(255, 206, 86, 1)',
@@ -191,6 +209,13 @@ let myChart = new Chart(ctx, {
                 'rgba(205, 216, 79, 1)',
             ],
             borderWidth: 1
+        }, {
+          fill: false,
+          label: `All users' average ${chartSelection.value}`,
+          data: selectActivityChartMetric().allData,
+          borderWidth: 1,
+          pointRadius: 1.5,
+          borderColor: 'rgba(147, 3, 46, 1)',
         }]
     },
     options: {
@@ -201,5 +226,13 @@ let myChart = new Chart(ctx, {
                 }
             }]
         }
-    }
-});
+      },
+  };
+  return chartInfo;
+}
+
+function postChart() {
+  chartSection.innerHTML = '';
+  let ctx = document.getElementById('myChart').getContext('2d');
+  let myChart = new Chart(ctx, generateChart());
+}
