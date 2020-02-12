@@ -1,8 +1,9 @@
 class UserRepository {
-  constructor(userData, hydrationData, sleepData) {
+  constructor(userData, hydrationData, sleepData, activityData) {
     this.users = userData;
     this.hydrationData = hydrationData;
     this.sleepData = sleepData;
+    this.activityData = activityData;
   }
 
   findUser(userId) {

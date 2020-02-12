@@ -2,87 +2,136 @@ const chai = require('chai');
 const expect = chai.expect;
 const UserRepository = require('../src/user-repository.js');
 
-describe('User Repository', function () {
+describe('User Repository', function() {
   let userRepository;
   let userData;
   let hydrationData;
   let sleepData;
-  beforeEach(function () {
-    sleepData = [
+  let activityData
+  beforeEach(function() {
+    activityData = [{
+        userID: 1,
+        date: "2019/06/15",
+        numSteps: 3577,
+        minutesActive: 140,
+        flightsOfStairs: 16
+      },
       {
         userID: 1,
-        date : "2019/06/15",
-        hoursSlept : 6.1,
-        sleepQuality : 2.2
+        date: "2019/06/16",
+        numSteps: 4294,
+        minutesActive: 138,
+        flightsOfStairs: 10
       },
       {
-         userID : 2,
-         date : "2019/06/15",
-         hoursSlept : 7,
-         sleepQuality : 4.7,
+        userID: 1,
+        date: "2019/06/17",
+        numSteps: 7402,
+        minutesActive: 116,
+        flightsOfStairs: 33
       },
       {
-         userID : 1,
-         date : "2019/06/16",
-         hoursSlept : 10.8,
-         sleepQuality : 4.7
+        userID: 1,
+        date: "2019/06/18",
+        numSteps: 3486,
+        minutesActive: 114,
+        flightsOfStairs: 32
       },
       {
-         userID : 1,
-         date : "2019/06/17",
-         hoursSlept : 5.4,
-         sleepQuality : 3,
+        userID: 1,
+        date: "2019/06/19",
+        numSteps: 11374,
+        minutesActive: 213,
+        flightsOfStairs: 13
       },
       {
-         userID : 1,
-         date : "2019/06/18",
-         hoursSlept : 5.4,
-         sleepQuality : 3,
+        userID: 1,
+        date: "2019/06/20",
+        numSteps: 14810,
+        minutesActive: 287,
+        flightsOfStairs: 18
       },
       {
-         userID : 1,
-         date : "2019/06/19",
-         hoursSlept : 5.4,
-         sleepQuality : 3,
+        userID: 1,
+        date: "2019/06/21",
+        numSteps: 2634,
+        minutesActive: 107,
+        flightsOfStairs: 5
+      }
+    ];
+
+    sleepData = [{
+        userID: 1,
+        date: "2019/06/15",
+        hoursSlept: 6.1,
+        sleepQuality: 2.2
       },
       {
-         userID : 1,
-         date : "2019/06/20",
-         hoursSlept : 5.4,
-         sleepQuality : 3,
+        userID: 2,
+        date: "2019/06/15",
+        hoursSlept: 7,
+        sleepQuality: 4.7,
       },
       {
-         userID : 1,
-         date : "2019/06/21",
-         hoursSlept : 10.2,
-         sleepQuality : 3,
+        userID: 1,
+        date: "2019/06/16",
+        hoursSlept: 10.8,
+        sleepQuality: 4.7
       },
       {
-         userID : 1,
-         date : "2019/06/22",
-         hoursSlept : 5.4,
-         sleepQuality : 3,
+        userID: 1,
+        date: "2019/06/17",
+        hoursSlept: 5.4,
+        sleepQuality: 3,
+      },
+      {
+        userID: 1,
+        date: "2019/06/18",
+        hoursSlept: 5.4,
+        sleepQuality: 3,
+      },
+      {
+        userID: 1,
+        date: "2019/06/19",
+        hoursSlept: 5.4,
+        sleepQuality: 3,
+      },
+      {
+        userID: 1,
+        date: "2019/06/20",
+        hoursSlept: 5.4,
+        sleepQuality: 3,
+      },
+      {
+        userID: 1,
+        date: "2019/06/21",
+        hoursSlept: 10.2,
+        sleepQuality: 3,
+      },
+      {
+        userID: 1,
+        date: "2019/06/22",
+        hoursSlept: 5.4,
+        sleepQuality: 3,
       },
     ];
-    hydrationData = [
-      {
-         userID : 1,
-         date : "2019/06/15",
-         numOunces : 37
+    hydrationData = [{
+        userID: 1,
+        date: "2019/06/15",
+        numOunces: 37
       },
       {
-         userID : 2,
-         date : "2019/06/16",
-         numOunces : 69
+        userID: 2,
+        date: "2019/06/16",
+        numOunces: 69
       },
       {
-         userID : 1,
-         date : "2019/06/17",
-         numOunces : 96
+        userID: 1,
+        date: "2019/06/17",
+        numOunces: 96
       },
     ];
-    userData = [
-      {
+    userData = [{
         id: 1,
         name: 'Luisa Hane',
         address: '15195 Nakia Tunnel, Erdmanport VA 19901-1697',
@@ -124,29 +173,28 @@ describe('User Repository', function () {
         ],
       },
     ];
-    userRepository = new UserRepository(userData, hydrationData, sleepData);
+    userRepository = new UserRepository(userData, hydrationData, sleepData, activityData);
   });
 
-  it('Should be a function', function () {
+  it('Should be a function', function() {
     expect(UserRepository).to.be.a('function');
   });
 
-  it('Should have users', function () {
+  it('Should have users', function() {
     expect(userRepository.users).to.deep.equal(userData);
   });
 
-  it('Should be able to identify a single user', function(){
+  it('Should be able to identify a single user', function() {
     expect(userRepository.findUser(3)).to.equal(userData[2]);
   });
 
-  it('Should have a method that determines: The average step goal amongst all users', function () {
+  it('Should have a method that determines: The average step goal amongst all users', function() {
     expect(userRepository.calculateStepGoalAverage()).to.equal(6667);
   });
 
-  describe('Testing Sleep Data on UserRepository class', function(){
-    beforeEach(function(){
-      userData = [
-        {
+  describe('Testing Sleep Data on UserRepository class', function() {
+    beforeEach(function() {
+      userData = [{
         id: 1,
         name: 'Luisa Hane',
         address: '15195 Nakia Tunnel, Erdmanport VA 19901-1697',
@@ -158,21 +206,13 @@ describe('User Repository', function () {
           4,
           8,
         ],
-      },
-    ];
-      userRepository = new UserRepository(userData, hydrationData, sleepData);
+      }, ];
+      userRepository = new UserRepository(userData, hydrationData, sleepData, activityData);
     });
 
-    it('Should have a method that calculates the average sleep quality of all users', function () {
-      expect(userRepository.calcAverageSleepQualityAll()).to.equal(3.3);
+    it('Should Have Activity Data', function() {
+      expect(userRepository.activityData).to.equal(activityData)
     });
 
-    it('Should have a method that finds the best sleepers over the course of a week', function () {
-      expect(userRepository.findGoodSleepers(2019, 6, 22)).to.deep.equal([{"avgSleepQuality": 3.2428571428571424, "userID": 1}]);
-    });
-
-    it('Should contain a method that calculates the user/s that slept the best', function(){
-      expect(userRepository.findUserWhoSleptMost(2019, 6, 21)).to.deep.equal([{userID : 1, date : "2019/06/21", hoursSlept : 10.2, sleepQuality : 3,},]);
-    });
   });
 });

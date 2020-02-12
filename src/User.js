@@ -14,8 +14,7 @@ class User {
     this.friends = userData.friends;
     this.hydrationData = null;
     this.sleepData = null;
-
-    // this.activityData = null;
+    this.activityData = null;
   }
 
   showUserFirstName() {
@@ -26,8 +25,7 @@ class User {
   findAllData(dataRepo) {
     this.findUserData(this.id, dataRepo, 'hydrationData');
     this.findUserData(this.id, dataRepo, 'sleepData');
-
-    // findUserData(this.id, dataRepo, 'activityData');
+    this.findUserData(this.id, dataRepo, 'activityData');
   }
 
   findUserData(usersId, dataRepo, dataType) {
@@ -38,31 +36,39 @@ class User {
   getDataSetByDate(year, month, day, dataProperty) {
     let monthUnder10 = (month < 10) ? 0 : '';
     let dayUnder10 = (day < 10) ? 0 : '';
-    let dataset = dataProperty.find(data => data.date === `${year}/${monthUnder10}${month}/${dayUnder10}${day}`);
+    let dataset = this[dataProperty].find(data => data.date === `${year}/${monthUnder10}${month}/${dayUnder10}${day}`);
     return dataset;
   }
+
+  getDataSetByWeek(year, month, day, dataProperty) {
+    let dataset = this.getDataSetByDate(year, month, day, dataProperty);
+    let endDay = this[dataProperty].indexOf(dataset);
+    let week = this[dataProperty].slice(endDay - 6, endDay + 1);
+    return week;
+  };
 
   //---------------------------------Hydration---------------------------------
 
   avgFluidConsumed(avgOf) {
     let total = avgOf.reduce((total, flOz) => {
-                  total += flOz.numOunces;
-                  return total;
-                }, 0);
+      total += flOz.numOunces;
+      return total;
+    }, 0);
     return Math.trunc(total / avgOf.length);
   }
 
-  fluidConsumedByDay(year, month, day) {
-    let dataset = this.getDataSetByDate(year, month, day, this.hydrationData);
+  fluidConsumedByDay(year, month, day, hydrationData) {
+    let dataset = this.getDataSetByDate(year, month, day, hydrationData);
     return dataset.numOunces;
   }
 
   fluidConsumedPerWeek(year, month, day) {
-    let dataset = this.getDataSetByDate(year, month, day, this.hydrationData);
-    let endDay = this.hydrationData.indexOf(dataset);
-    let week = this.hydrationData.slice(endDay - 6, endDay + 1);
-    return week.map(day => {
-      let newValue = {date: day.date, numOunces: day.numOunces};
+    let dataset = this.getDataSetByWeek(year, month, day, 'hydrationData');
+    return dataset.map(day => {
+      let newValue = {
+        date: day.date,
+        numOunces: day.numOunces
+      };
       return newValue;
     });
   }
@@ -72,27 +78,59 @@ class User {
   //avgSleep(dataset, 'sleepQuality'); for avg sleep quality all time
   avgSleep(dataset, dataType) {
     let total = dataset.reduce((acc, currentValue) => {
-                  acc += currentValue[dataType];
-                  return acc;
-                }, 0);
+      acc += currentValue[dataType];
+      return acc;
+    }, 0);
     return parseFloat((total / dataset.length).toFixed(1));
   }
 
   //for both amount slept per day & sleep quality per day
-  sleepStatByDay(year, month, day, dataType) {
-    let dataset = this.getDataSetByDate(year, month, day, this.sleepData);
+  sleepStatByDay(year, month, day, datasetProperty, dataType) {
+    let dataset = this.getDataSetByDate(year, month, day, datasetProperty);
     return dataset[dataType];
   }
 
   sleepPerWeek(year, month, day) {
-    let dataset = this.getDataSetByDate(year, month, day, this.sleepData);
-    let endDay = this.sleepData.indexOf(dataset);
-    let week = this.sleepData.slice(endDay - 6, endDay + 1);
-    return week.map(day => {
-      let newValue = { date: day.date, hoursSlept: day.hoursSlept,
-        sleepQuality: day.sleepQuality, };
+    let dataset = this.getDataSetByWeek(year, month, day, 'sleepData');
+    return dataset.map(day => {
+      let newValue = {
+        date: day.date,
+        hoursSlept: day.hoursSlept,
+        sleepQuality: day.sleepQuality,
+      };
       return newValue;
     });
+  }
+  //--------------------------Activity-------------
+  calculateMiles(year, month, day, dataProperty) {
+    let dataset = this.getDataSetByDate(year, month, day, dataProperty);
+    let distance = parseFloat(((this.strideLength * dataset.numSteps) / 5280).toFixed(2));
+    return distance;
+  }
+
+  showMinutesActiveDay(year, month, day, dataProperty) {
+    let dataset = this.getDataSetByDate(year, month, day, dataProperty);
+    return dataset.minutesActive;
+  }
+
+  showAvgMinutesActiveWeek(year, month, day, dataProperty) {
+    let dataset = this.getDataSetByWeek(year, month, day, dataProperty);
+    console.log(dataset);
+    return Math.round(dataset.reduce((acc, currentValue) => {
+      acc += currentValue.minutesActive
+      return acc
+    }, 0) / 7)
+  }
+
+  stepGoalAchieved(year, month, day, dataProperty) {
+    let dataset = this.getDataSetByDate(year, month, day, dataProperty);
+    return this.dailyStepGoal <= dataset.numSteps;
+  }
+
+  daysStepGoalAchieved() {
+    let dataset = [...this.activityData];
+    let daysAcheived = dataset.filter(day => day.numSteps >= this.dailyStepGoal);
+    return daysAcheived.map(day => day.date);
   }
 
 }
