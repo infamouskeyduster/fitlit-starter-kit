@@ -17,46 +17,18 @@ describe('User Repository', function() {
         flightsOfStairs: 16
       },
       {
-        userID: 1,
-        date: "2019/06/16",
+        userID: 2,
+        date: "2019/06/15",
         numSteps: 4294,
         minutesActive: 138,
         flightsOfStairs: 10
       },
       {
-        userID: 1,
-        date: "2019/06/17",
+        userID: 3,
+        date: "2019/06/15",
         numSteps: 7402,
         minutesActive: 116,
         flightsOfStairs: 33
-      },
-      {
-        userID: 1,
-        date: "2019/06/18",
-        numSteps: 3486,
-        minutesActive: 114,
-        flightsOfStairs: 32
-      },
-      {
-        userID: 1,
-        date: "2019/06/19",
-        numSteps: 11374,
-        minutesActive: 213,
-        flightsOfStairs: 13
-      },
-      {
-        userID: 1,
-        date: "2019/06/20",
-        numSteps: 14810,
-        minutesActive: 287,
-        flightsOfStairs: 18
-      },
-      {
-        userID: 1,
-        date: "2019/06/21",
-        numSteps: 2634,
-        minutesActive: 107,
-        flightsOfStairs: 5
       }
     ];
 
@@ -207,12 +179,87 @@ describe('User Repository', function() {
           8,
         ],
       }, ];
-      userRepository = new UserRepository(userData, hydrationData, sleepData, activityData);
+      userRepository = new UserRepository(userData, hydrationData, sleepData);
     });
 
-    it('Should Have Activity Data', function() {
-      expect(userRepository.activityData).to.equal(activityData)
+    it('Should have a method that calculates the average sleep quality of all users', function() {
+      expect(userRepository.calcAverageSleepQualityAll()).to.equal(3.3);
     });
+
+    it('Should have a method that finds the best sleepers over the course of a week', function() {
+      expect(userRepository.findGoodSleepers(2019, 6, 22)).to.deep.equal([{
+        "avgSleepQuality": 3.2428571428571424,
+        "userID": 1
+      }]);
+    });
+
+    it('Should contain a method that calculates the user/s that slept the best', function() {
+      expect(userRepository.findUserWhoSleptMost(2019, 6, 21)).to.deep.equal([{
+        userID: 1,
+        date: "2019/06/21",
+        hoursSlept: 10.2,
+        sleepQuality: 3,
+      }, ]);
+    });
+  });
+
+  describe('Testing Sleep Data on UserRepository class', function() {
+    beforeEach(function() {
+      userData = [{
+        id: 1,
+        name: 'Luisa Hane',
+        address: '15195 Nakia Tunnel, Erdmanport VA 19901-1697',
+        email: 'Diana.Hayes1@hotmail.com',
+        strideLength: 4.3,
+        dailyStepGoal: 10000,
+        friends: [
+          16,
+          4,
+          8,
+        ],
+      }, ];
+      userRepository = new UserRepository(userData, hydrationData, sleepData);
+    });
+
+    it('Should have a method that calculates the average sleep quality of all users', function() {
+      expect(userRepository.calcAverageSleepQualityAll()).to.equal(3.3);
+    });
+
+    it('Should have a method that finds the best sleepers over the course of a week', function() {
+      expect(userRepository.findGoodSleepers(2019, 6, 22)).to.deep.equal([{
+        "avgSleepQuality": 3.2428571428571424,
+        "userID": 1
+      }]);
+    });
+
+    it('Should contain a method that calculates the user/s that slept the best', function() {
+      expect(userRepository.findUserWhoSleptMost(2019, 6, 21)).to.deep.equal([{
+        userID: 1,
+        date: "2019/06/21",
+        hoursSlept: 10.2,
+        sleepQuality: 3,
+      }, ]);
+    });
+  });
+
+  describe('Should Have Actity', function() {
+    it('Should have activity data', function() {
+      expect(userRepository.activityData).to.deep.equal(activityData)
+    });
+
+    it('Should find avg of all users stair count on given day', function() {
+      expect(userRepository.findAvgOfActityData(2019, 06, 15, 'flightsOfStairs')).to.equal(20)
+    });
+
+    it('Should find avg of all users steps taken on given day', function() {
+      expect(userRepository.findAvgOfActityData(2019, 06, 15, 'numSteps')).to.equal(5091)
+    });
+
+    it('Should find avg of all users minutes active on given day', function() {
+      expect(userRepository.findAvgOfActityData(2019, 06, 15, 'minutesActive')).to.equal(131)
+    });
+
 
   });
+
 });

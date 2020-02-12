@@ -298,6 +298,10 @@ describe('User class object', function () {
       expect(user.daysStepGoalAchieved()).to.deep.equal(dates)
     });
 
+    it('Should show users all time stair climbing record', function(){
+      expect(user.showStairClimbingRecord()).to.deep.equal(33)
+    });
+
 
   });
 
