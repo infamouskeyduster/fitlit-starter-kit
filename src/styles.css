@@ -162,6 +162,7 @@ select:focus {
   font-size: 1.3rem;
 }
 
+.user-activity-info img,
 .user-sleep-info img,
 .user-water-info img {
   display: block;

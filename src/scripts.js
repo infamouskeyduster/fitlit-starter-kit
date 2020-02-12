@@ -9,9 +9,13 @@ const waterDateSelection = document.querySelector('.selection-water-js');
 const sleepSectionContainer = document.querySelector('.user-sleep-js');
 const sleepSection = document.querySelector('.user-sleep-info-js');
 const sleepDateSelection = document.querySelector('.selection-sleep-js');
+const activitySectionContainer = document.querySelector('.user-activity-js');
+const activitySection = document.querySelector('.user-activity-info-js');
+const activityDateSelection = document.querySelector('.selection-activity-js');
 
 waterSectionContainer.addEventListener('change', postWaterData);
 sleepSectionContainer.addEventListener('change', postSleepData);
+activitySectionContainer.addEventListener('change', postActivityData);
 
 function pickAUser() {
   return Math.ceil(Math.random() * 50);
@@ -32,6 +36,7 @@ user.findAllData(userRepository);
 // user.findUserData(user.id, userRepository, 'hydrationData');
 postWaterData();
 postSleepData();
+postActivityData();
 
 function timePeriodHelperWaterMessage() {
   let date = splitTodaysDay();
@@ -78,6 +83,38 @@ function postSleepData() {
     <div class= 'sleep-stats'>
       <h4>${sleepInfo.hoursSlept} <span>Hours</span></h4>
       <h4><span>Quality Rating:</span> ${sleepInfo.sleepQuality} </h4>
+    </div>`);
+}
+
+function timePeriodHelperActivityMessage() {
+  let date = splitTodaysDay();
+  switch (activityDateSelection.value) {
+    case 'Today\'s Steps':
+      return {
+        metric: user.showStepsForDay(date[0], date[1], date[2], 'activityData'),
+        message: 'taken',
+      };
+    case 'Today\'s Active Time':
+      return {
+        metric: user.showMinutesActiveDay(date[0], date[1], date[2], 'activityData'),
+        message: 'minutes',
+      };
+    case 'Today\'s Distance':
+      return {
+        metric: user.calculateMiles(date[0], date[1], date[2], 'activityData'),
+        message: 'miles',
+      };
+  }
+}
+
+function postActivityData() {
+  activitySection.innerHTML = '';
+  let activityInfo = timePeriodHelperActivityMessage();
+  activitySection.insertAdjacentHTML('afterbegin',
+    `<h5>${activityDateSelection.value}</h5>
+    <img src='../assets/1444858-running/svg/025-running-6.svg' alt='activity icon'>
+    <div class= 'sleep-stats'>
+      <h4>${activityInfo.metric} <span>${activityInfo.message}</span></h4>
     </div>`);
 }
 

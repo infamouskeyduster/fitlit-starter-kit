@@ -108,6 +108,11 @@ class User {
     return distance;
   }
 
+  showStepsForDay(year, month, day, dataProperty) {
+    let dataset = this.getDataSetByDate(year, month, day, dataProperty);
+    return dataset.numSteps;
+  }
+
   showMinutesActiveDay(year, month, day, dataProperty) {
     let dataset = this.getDataSetByDate(year, month, day, dataProperty);
     return dataset.minutesActive;
