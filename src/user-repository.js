@@ -35,21 +35,21 @@ class UserRepository {
     return date;
   }
 
-  grabDataSetByDay(year, month, day) {
+  grabDataSetByDay(year, month, day, dataProperty) {
     let allData = [];
     let date = this.stringifyDate(year, month, day);
     this.users.forEach(user => {
-      let userSleepData = this.sleepData.find(data => data.date === date && data.userID === user.id);
-      allData.push(userSleepData);
+      let userData = this[dataProperty].find(data => data.date === date && data.userID === user.id);
+      allData.push(userData);
     });
     return allData;
   }
 
-  grabDataSetByWeek(year, month, day) {
+  grabDataSetByWeek(year, month, day, dataProperty) {
     let allData = [];
     let date = this.stringifyDate(year, month, day);
     this.users.forEach(user => {
-      let dataset = this.sleepData.filter(el => el.userID === user.id);
+      let dataset = this[dataProperty].filter(el => el.userID === user.id);
       let startDate = dataset.find(day => day.date === date);
       let startDay = dataset.indexOf(startDate);
       allData.push(dataset.slice(startDay - 6, startDay + 1));
@@ -58,7 +58,7 @@ class UserRepository {
   }
 
   findGoodSleepers(year, month, day) {
-    let dataset = this.grabDataSetByWeek(year, month, day);
+    let dataset =  this.grabDataSetByWeek(year, month, day, 'sleepData');
     dataset = dataset.map(data => {
       return data.reduce((acc, currentValue) => {
         acc.userID = currentValue.userID
@@ -76,11 +76,21 @@ class UserRepository {
   }
 
   findUserWhoSleptMost(year, month, day) {
-    let dataset = [...this.grabDataSetByDay(year, month, day)];
+    let dataset = [...this.grabDataSetByDay(year, month, day, 'sleepData')];
     dataset.sort((a, b) => a.hoursSlept - b.hoursSlept);
     return dataset.filter(data => data.hoursSlept === dataset[dataset.length - 1].hoursSlept);
   }
+
+  findAvgOfActityData(year, month, day, dataProperty) {
+    let dataset = [...this.grabDataSetByDay(year, month, day, 'activityData')];
+    let total = dataset.reduce((acc, currentValue) => {
+      acc += currentValue[dataProperty]
+      return acc;
+    }, 0);
+    return Math.round(total / dataset.length);
+  }
 }
+
 
 if (typeof module !== 'undefined') {
   module.exports = UserRepository;

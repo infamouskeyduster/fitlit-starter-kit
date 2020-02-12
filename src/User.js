@@ -133,6 +133,12 @@ class User {
     return daysAcheived.map(day => day.date);
   }
 
+  showStairClimbingRecord() {
+    let dataset = [...this.activityData];
+    let stairNums = dataset.sort((a , b) => a.flightsOfStairs - b.flightsOfStairs);
+    return stairNums[stairNums.length - 1].flightsOfStairs
+  }
+
 }
 
 if (typeof module !== 'undefined') {
