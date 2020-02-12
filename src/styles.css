@@ -14,11 +14,11 @@ font-family: 'Metrophobic', sans-serif; */
 html,
 body {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
 }
 
 body {
-  padding: 0em 4.25rem;
+  padding: 2rem 4.25rem 2rem 4.25rem;
   background: #114B5F;
   color: #CDD84F;
 }
@@ -27,7 +27,7 @@ nav {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  padding: 2.5rem 0rem 1.5rem;
+  padding: 0rem 0rem 1.5rem;
   font-family: 'Taviraj', serif;
   font-size: 1.5rem;
 }
@@ -137,10 +137,15 @@ select:focus {
   width: 100%;
 }
 
+.user-activity-info h4,
 .user-sleep-info h4,
 .user-water-info h4 {
   font-family: 'Montserrat', sans-serif;
   font-size: 2.75rem;
+}
+
+.user-activity-info h4 {
+  font-size: 2.15rem;
 }
 
 .user-sleep-info h4 {
@@ -157,7 +162,13 @@ select:focus {
   font-size: 1rem;
 }
 
+.user-activity-info span {
+  font-family: 'Taviraj', serif;
+  font-size: 1.5rem;
+}
+
 .user-sleep-info h5,
+.user-activity-info h5,
 .user-water-info h5 {
   font-size: 1.3rem;
 }

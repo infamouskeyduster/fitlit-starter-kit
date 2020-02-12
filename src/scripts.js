@@ -113,7 +113,7 @@ function postActivityData() {
   activitySection.insertAdjacentHTML('afterbegin',
     `<h5>${activityDateSelection.value}</h5>
     <img src='../assets/1444858-running/svg/025-running-6.svg' alt='activity icon'>
-    <div class= 'sleep-stats'>
+    <div class= 'activity-stats'>
       <h4>${activityInfo.metric} <span>${activityInfo.message}</span></h4>
     </div>`);
 }
