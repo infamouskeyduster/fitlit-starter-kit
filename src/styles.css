@@ -100,6 +100,8 @@ li {
   grid-area: c;
 }
 
+.friend,
+.friend-list,
 .user-graph,
 .user-activity-info,
 .user-activity,
@@ -112,6 +114,14 @@ li {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+}
+
+.friend {
+  flex-direction: row;
+}
+
+.friend-list {
+  align-items: flex-start;
 }
 
 .user-water {
@@ -127,15 +137,15 @@ select {
 
 select:focus {
   outline: none;
-  color: #EFFDF0;
   background: #93032E;
+  color: #EFFDF0;
 }
 
 .user-activity-info,
 .user-sleep-info,
 .user-water-info {
-  height: 90%;
   width: 100%;
+  height: 90%;
 }
 
 .user-activity-info h4,
