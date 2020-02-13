@@ -6,6 +6,9 @@
 
 ## Screen Grabs of Finished Product
 
+![Image of App](assets/screen-shots/Screen Shot 2020-02-12 at 4.58.42 PM.png)
+
+
 ![alt text](assets/screen-shots/Screen Shot 2020-02-12 at 4.58.42 PM.png "Screen Shot 1")
 
 
