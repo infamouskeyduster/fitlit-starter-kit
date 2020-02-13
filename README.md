@@ -1,5 +1,7 @@
 # Activity Tracker
 
+## [Go to Our Site](file:///Users/johnwatterson/mod_2/FitLit-health-tracker-project/src/index.html)
+
 ## Screen Grabs of Finished Product
 
 ![giphy](assets/screen-shots/Screen Shot 2020-02-12 at 4.58.42 PM.png)
