@@ -4,8 +4,8 @@
 
 ## Screen Grabs of Finished Product
 
-![giphy](assets/screen-shots/Screen Shot 2020-02-12 at 4.58.42 PM.png)
-![giphy](assets/screen-shots/Screen Shot 2020-02-12 at 4.58.58 PM.png)
+![alt text](assets/screen-shots/Screen Shot 2020-02-12 at 4.58.42 PM.png)
+![alt text](assets/screen-shots/Screen Shot 2020-02-12 at 4.58.58 PM.png)
 
 ## General info
 
