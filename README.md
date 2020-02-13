@@ -6,10 +6,10 @@
 
 ## Screen Grabs of Finished Product
 
-![Alt text](/assets/screen-shots/Screen Shot 2020-02-12 at 4.58.42 PM.png "Screen Shot 1")
+![Alt text](./assets/screen-shots/Screen Shot 2020-02-12 at 4.58.42 PM.png "Screen Shot 1")
 
 
-![Alt text](/assets/screen-shots/Screen Shot 2020-02-12 at 4.58.58 PM.png "Screen Shot 1")
+![Alt text](./assets/screen-shots/Screen Shot 2020-02-12 at 4.58.58 PM.png "Screen Shot 1")
 
 
 ## General info
