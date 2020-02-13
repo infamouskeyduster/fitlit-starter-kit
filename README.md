@@ -6,13 +6,9 @@
 
 ## Screen Grabs of Finished Product
 
-![Image of App](assets/screen-shots/Screen Shot 2020-02-12 at 4.58.42 PM.png)
+<img width="1440" alt="Screen Shot 2020-02-12 at 4 58 42 PM" src="https://user-images.githubusercontent.com/49289426/74468883-7fd44c00-4e93-11ea-87b4-fdfcee875201.png">
 
-
-![alt text](assets/screen-shots/Screen Shot 2020-02-12 at 4.58.42 PM.png "Screen Shot 1")
-
-
-![alt text](assets/screen-shots/Screen Shot 2020-02-12 at 4.58.58 PM.png "Screen Shot 1")
+<img width="1440" alt="Screen Shot 2020-02-12 at 4 58 58 PM" src="https://user-images.githubusercontent.com/49289426/74468947-9da1b100-4e93-11ea-9d85-9d9fdc05cebf.png">
 
 
 ## General info
