@@ -1,10 +1,12 @@
 # Activity Tracker
 
 ## Go To Our Site:
-[Go to Our Site](https://infamouskeyduster.github.io/fitlit-starter-kit/src/index.html)
+[Click Here](https://infamouskeyduster.github.io/fitlit-starter-kit/src/index.html)
 
 
 ## Screen Grabs of Finished Product
+<img width=“1439” alt=“Screen Shot 2020-01-08 at 1 31 14 PM” src=“assets/screen-shots/Screen Shot 2020-02-12 at 4.58.42 PM.png
+”>
 
 ![alt text](assets/screen-shots/Screen Shot 2020-02-12 at 4.58.42 PM.png)
 ![alt text](assets/screen-shots/Screen Shot 2020-02-12 at 4.58.58 PM.png)
