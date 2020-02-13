@@ -1,7 +1,8 @@
 # Activity Tracker
 
 ## Go To Our Site:
-[Go to Our Site](file:///Users/johnwatterson/mod_2/FitLit-health-tracker-project/src/index.html)
+[Go to Our Site](https://infamouskeyduster.github.io/fitlit-starter-kit/src/index.html)
+
 
 ## Screen Grabs of Finished Product
 
