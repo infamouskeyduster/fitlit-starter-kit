@@ -2,6 +2,9 @@
 
 ## Screen Grabs of Finished Product
 
+![giphy](assets/screen-shots/Screen Shot 2020-02-12 at 4.58.42 PM.png)
+![giphy](assets/screen-shots/Screen Shot 2020-02-12 at 4.58.58 PM.png)
+
 ## General info
 
 Activity tracker is an application that shows pertinent metrics, and trends for each user's _sleep, hydration,_ and _steps_ data repositories. The application uses these data repositories, and then (using methods on various object Classes) compiles and calculates specifics, so that all the user's information can be displayed on the page's widgets in a meaningful way. This project was created as a paired programming exercise in Front End Engineering Module 2 at _Turing School of Software and Design_ This project demonstrates a comprehension of __TDD__ _test driven development_, __object oriented programming, data structure__ and __analysis__, as well as DOM creation around the analyzed data.

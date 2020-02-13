@@ -265,10 +265,10 @@ function friendMessageHelper(friend) {
 function sortFriendslist() {
   let friendsInfo = [...user.getFriends(userRepository)]
   friendsInfo = friendsInfo.map(friend => {
-    return friendMessageHelper(friend)
+    return friendMessageHelper(friend);
   });
-  friendsInfo.sort((a, b) => a.steps - b.steps)
-  return friendsInfo
+  friendsInfo.sort((a, b) => a.steps - b.steps);
+  return friendsInfo.slice(0, 8);
 }
 function postFriends() {
   friendSection.innerHTML = ''
@@ -278,8 +278,8 @@ function postFriends() {
     `<div class='friend'>
       <img src="../assets/1444858-running/svg/user.svg" alt="user">
       <div>
-      <h4>${friend.name} </h4>
-      <h4>${friend.steps} </h4>
+      <h4 class="friend-name">${friend.name} </h4>
+      <h4>${friend.steps} steps</h4>
       <div>
     </div>`);
   });

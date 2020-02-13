@@ -100,7 +100,6 @@ li {
   grid-area: c;
 }
 
-.friend,
 .friend-list,
 .user-graph,
 .user-activity-info,
@@ -117,12 +116,31 @@ li {
 }
 
 .friend {
+  display: flex;
   flex-direction: row;
+  width: 100%;
+  margin-bottom: 7%;
+  align-items: center;
+  font-size: 1.15rem;
+}
+
+.friend-name {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 .friend-list {
-  align-items: flex-start;
+  justify-content: flex-start;
+  align-content: flex-start;
 }
+
+.friend img {
+  flex-direction: row;
+  width: 25%;
+  margin-right: 5%;
+}
+
 
 .user-water {
   grid-area: d;
